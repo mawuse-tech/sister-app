@@ -4,7 +4,7 @@ import SignupStructure from './SignupStructure'
 const LoginPage = () => {
   return (
      <>
-      <SignupStructure titleone="Welcome Back" titletwo=" Join as a sister Help a sister" desription="Support young women by offering a listening ear and guidance">
+      <SignupStructure titleone="Welcome Back" titletwo=" Join as a sister Help a sister" maintit="Log into your Account" desription="Support young women by offering a listening ear and guidance">
         <form action="">
 
           {/* Email */}
@@ -39,7 +39,8 @@ const LoginPage = () => {
           </div>
 
           {/* Submit */}
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg rounded-2xl bg-[#5651AB] border-none">Login</button>
+          <button className="btn bg-[#5651AB] border-none px-7">Login</button>
+          
           <div className='text-black py-2'>
             <p>Don't have an account yet?</p>
             <p><a href="">Sign up</a></p>
