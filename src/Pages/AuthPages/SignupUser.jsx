@@ -4,7 +4,7 @@ import SignupStructure from './SignupStructure'
 const SignupUser = () => {
   return (
     <>
-      <SignupStructure titleone="Create An Account to Join" titletwo=" Find a sister to chat with" desription="Support young women by offering a listening ear and guidance">
+      <SignupStructure titleone="Create An Account to Join" titletwo=" Find a sister to chat with" maintit="Sign Up" desription="Support young women by offering a listening ear and guidance">
         <form action="">
           {/* Name */}
           <div className="mb-6">
@@ -52,7 +52,7 @@ const SignupUser = () => {
           </div>
 
           {/* Submit */}
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg rounded-2xl bg-[#5651AB] border-none">Sign Up</button>
+          <button className="btn bg-[#5651AB] border-none px-7">Sign up</button>
 
         </form>
       </SignupStructure>
