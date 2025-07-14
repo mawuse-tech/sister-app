@@ -8,17 +8,21 @@ import SisterDashboard from './Pages/SisterPages/SisterDashboard'
 import SisMessages from './Pages/SisterPages/SisMessages'
 import EditProfilePage from './Pages/SisterPages/EditProfilePage'
 import AvailabilityPage from './Pages/SisterPages/AvailabilityPage'
+import UserDashboard from './Pages/UserPages/UserDashboard'
+import ViewAllSisters from './Pages/UserPages/ViewAllSisters'
 
 const App = () => {
   return (
     <div>
-     <SignupSister/>
-     <SignupUser/> 
-     <LoginPage/>
-    <SisterDashboard/>
-    <SisMessages/>
-    <EditProfilePage/>
-    <AvailabilityPage/>
+      {/* <SignupSister/> */}
+     {/* <SignupUser/>  */}
+     {/* <LoginPage/> */}
+    {/* <SisterDashboard/> */}
+    {/* <SisMessages/> */}
+    {/* <EditProfilePage/> */}
+    {/* <AvailabilityPage/>  */}
+    {/* <UserDashboard/> */}
+    <ViewAllSisters/>
     </div>
   )
 }
