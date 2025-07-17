@@ -4,6 +4,7 @@ import lawyer from "../../assets/images/lawyer.jpg"
 import doctor from "../../assets/images/doctor.jpg"
 import teacher from "../../assets/images/teacher.jpg"
 import indicator from 'daisyui/components/indicator'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const sisterData = [
   {
@@ -20,7 +21,7 @@ const sisterData = [
     image: doctor,
     name: "Efuwa Mensah York",
     proffession: "Doctor",
-    notavailable: "not Available"
+    available: "not Available"
 
   },
   {
@@ -87,7 +88,7 @@ const ViewAllSisters = () => {
   return (
     <>
       {/* Blue Header Background */}
-      <div className="bg-[#5651AB] h-[16rem] lg:h-48 relative flex flex-col items-center justify-center px-4">
+      <div className="bg-[#5651AB] h-[16rem] lg:h-52 relative flex flex-col items-center justify-center px-4">
 
         {/* Input Boxes Container */}
         <div className="flex flex-col lg:flex-row justify-center lg:gap-28 gap-5 px-4 w-full  absolute top-10 lg:top-12 z-10">
@@ -99,8 +100,8 @@ const ViewAllSisters = () => {
             {/* Search Input with left padding for icon */}
             <input
               type="text"
-              placeholder="Search by name"
-              className="p-3 pl-10 rounded bg-white shadow-md outline-none w-full"
+              placeholder="Search by proffession"
+              className="p-3 pl-10 rounded bg-white text-[#5651AB] shadow-md outline-none w-full"
             />
           </div>
 
@@ -142,7 +143,7 @@ const ViewAllSisters = () => {
         {/* Section Title */}
         <div className="absolute top-44 lg:top-32 text-center text-white px-4">
           <h3 className="text-2xl md:text-3xl font-semibold">Meet All Sisters</h3>
-          <p className="mt-2 text-sm md:text-base">Browse through available sisters and start a chat</p>
+          <p className="mt-2 pb-4 text-sm md:text-base">Browse through available sisters and start a chat</p>
         </div>
       </div>
 
@@ -153,42 +154,53 @@ const ViewAllSisters = () => {
           {currentSisters.map((sister) => (
             <div
               key={sister.id}
-              className="bg-white rounded shadow-md flex flex-col items-center justify-center "
+              className="bg-[#5651AB] rounded shadow-md flex flex-col gap-1 items-center justify-center"
             >
               <img
                 src={sister.image}
                 alt={sister.name}
-                className="w-full h-2/3 object-cover rounded-t"
+                className="w-full h-60 object-cover rounded-t"
               />
-              <p className="text-center mt-2 font-semibold">{sister.name}</p>
+              <p className="text-center font-semibold">{sister.name}</p>
+              <p className="text-center font-semibold">{sister.proffession}</p>
+              <div className='flex gap-3'>
+               <span className='text-[#5651AB] bg-white font-bold px-1'>Chat</span>
+               <span className='text-[#5651AB] bg-white font-bold px-1'>View Profile</span>
+             </div>
+              <span className="text-center mt-2 font-semibold text-[#5651AB] bg-white px-4 py-1 mb-3">{sister.available}</span>
+             
             </div>
           ))}
         </div>
 
-        <div className="join grid grid-cols-2">
-          <div className='bg-amber-700'>
+        <div className="flex justify-around mt-3">
+         
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              className="join-item btn btn-outline"
+              className={`join-item btn btn-outline text-[white] !bg-[#5651AB] px-6 border-none ${
+                currentPage === 1 ? 'opacity-40 cursor-not-allowed' : ''
+              }`}
               disabled={currentPage === 1}
             >
+              <FaArrowLeft/>
               Previous page
             </button>
-          </div>
-
-          <div className='bg-amber-600'>
+          
             <button
               onClick={() =>
                 setCurrentPage((prev) =>
                   indexOfLastSister < sisterData.length ? prev + 1 : prev
                 )
               }
-              className="join-item btn btn-outline"
+              className={`join-item btn btn-outline text-white !bg-[#5651AB] px-6 mb-6 border-none ${
+                indexOfLastSister >= sisterData.length ? 'opacity-40 cursor-not-allowed' : '' 
+              }`}
               disabled={indexOfLastSister >= sisterData.length}
             >
               Next
+               <FaArrowRight/>
             </button>
-          </div>
+       
         </div>
       </div>
     </>
