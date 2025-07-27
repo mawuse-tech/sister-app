@@ -9,6 +9,7 @@ const BackgroundSlideshow = () => {
     "/img2.png",
     "/img3.png",
     "/img4.png",
+    
     "/img5.avif",
     "/img6.png",
     "/asiapink&purple.png",

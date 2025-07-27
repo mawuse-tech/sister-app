@@ -1,115 +1,117 @@
-import React from 'react'
-import SignupStructure from './SignupStructure'
+import React from 'react';
+import signup from '../../assets/images/sign3.png'
+
 
 const SignupSister = () => {
   return (
     <>
-      <SignupStructure titleone="Create An Account to Join" titletwo=" Join as a sister Help a sister" maintit="Sign Up" desription="Support young women by offering a listening ear and guidance">
-        <form action="">
-          {/* Name */}
-          <div className="mb-6">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              What is your name?
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="name"
-                type="text"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        {/* Card section */}
+        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
+
+          {/* left Side */}
+          <div className="lg:w-1/2 p-6  w-full">
+            <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
+            <div className='flex items-center justify-center'>
+              <img className='lg:h-[30rem]' src={signup} alt="sign up svg" />
+            </div>
+
+          </div>
+          {/* Right Side */}
+          <div className="lg:w-1/2 p-6 lg:pl-0 lg:pr-6 flex text-gray-700 w-full">
+
+            <div>
+              <p className="mb-4 text-3xl font-medium">Create an Account</p>
+              <p className="text-sm mb-4">Please enter your details</p>
+
+              <div className='flex gap-2'>
+                <div> <label className="text-sm mb-1" htmlFor="email">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  /></div>
+
+                <div>
+                  <label className="text-sm mb-1" htmlFor="email">Email address</label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter email"
+                    className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  />
+                </div>
+              </div>
+
+              <div className='flex gap-2'>
+                <div>
+                  <label className="text-sm mb-1" htmlFor="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter password"
+                    className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm mb-1" htmlFor="password">Proffession</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your proffession"
+                    className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                  />
+                </div>
+              </div>
+
+              <div className='mt-2'>
+                <label className="text-sm mb-1" htmlFor="about">Your Bio</label>
+                <textarea
+                  id="about"
+                  className="textarea textarea-bordered border border-gray-500 w-full text-gray-700 bg-white"
+                  rows="4"
+                  placeholder="Write something about yourself..."
+                ></textarea>
+              </div>
+
+              <div className='flex gap-2 mt-2'>
+                <div> <label className="text-sm mb-1" htmlFor="email">Upload your Image</label>
+                  <input
+                    id="file"
+                    type="file"
+                    className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  /></div>
+
+                <div>
+                  <label className="text-sm mb-1" htmlFor="email">Upload your Lincence</label>
+                  <input
+                    id="file"
+                    type="file"
+                    className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm mb-1" htmlFor="email">LinkedIn Link</label>
+                  <input
+                    id="social"
+                    type="text"
+                    className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                    placeholder='optional'
+                  />
+                </div>
+              </div>
+
+              <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                <button className='cursor-pointer'>Sign Up</button>
+              </div>
             </div>
           </div>
 
-          {/* Email */}
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter your email
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#eaebff] rounded-full shadow-sm">
-              <input
-                id="email"
-                type="email"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
+        </div>
+      </div>
 
-          {/* Password */}
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter a password
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="password"
-                type="password"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
-          {/* Password */}
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter your profession
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="text"
-                type="text"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <label htmlFor="text" className="block text-sm font-medium text-gray-700 mb-2">
-              what are your specialties
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="text"
-                type="text"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
-
-          {/* Bio */}
-          <div className="mb-6">
-            <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
-              Your bio
-            </label>
-            <textarea
-              id="bio"
-              placeholder="Bio"
-              className="textarea textarea-bordered h-24 w-full bg-[#eaebff] text-gray-800 placeholder-gray-400"
-            ></textarea>
-          </div>
-
-          {/* File Upload */}
-          <div className="mb-6">
-            <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">
-              Upload your image
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="file"
-                type="file"
-                className=" outline-none bg-transparent text-gray-800 placeholder-gray-400 w-full max-w-md"
-              />
-            </div>
-          </div>
-
-          {/* Submit */}
-         <button className="btn bg-[#5651AB] border-none px-7">Sign up</button>
-
-        </form>
-      </SignupStructure>
     </>
   )
 }
