@@ -1,52 +1,54 @@
-import React from 'react'
-import SignupStructure from './SignupStructure'
+import React from 'react';
+import loginsvg from '../../assets/images/sign.png'
 
 const LoginPage = () => {
   return (
-     <>
-      <SignupStructure titleone="Welcome Back" titletwo=" Join as a sister Help a sister" maintit="Log into your Account" desription="Support young women by offering a listening ear and guidance">
-        <form action="">
+    <>
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        {/* Card section */}
+        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
 
-          {/* Email */}
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter your email
-            </label>
-
-            <div className="flex items-center gap-2 p-3 bg-[#eaebff] rounded-full shadow-sm">
-              <input
-                id="email"
-                type="email"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400 "
-              />
-            </div>
+          {/* left Side */}
+         <div  className="lg:w-1/2 p-6  w-full">
+          <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
+           <div className='flex items-center justify-center'>
+           <img src={loginsvg} alt="login svg" />
           </div>
 
-          {/* Password */}
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter a password
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
+         </div>
+          {/* Right Side */}
+          <div className="lg:w-1/2 p-6 flex text-gray-700 w-full mt-10">
+
+            <div>
+              <p className="mb-4 text-3xl font-medium">Welcome Back</p>
+              <p className="text-sm mb-4">Please enter your details</p>
+              <label className="text-sm mb-1" htmlFor="email">Email address</label>
+              <input
+                id="email"
+                type="text"
+                placeholder="Enter email"
+                className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+              />
+
+              <label className="text-sm mb-1" htmlFor="password">Password</label>
               <input
                 id="password"
                 type="password"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
+                placeholder="Enter password"
+                className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
               />
+
+              <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                <button className='cursor-pointer'>Sign In</button>
+              </div>
+
+              <p className='text-gray-600 mt-1 text-sm'>Don't have an account? <span className='text-[#BA68C8] underline italic'>Sign up</span></p>
             </div>
           </div>
 
-          {/* Submit */}
-          <button className="btn bg-[#5651AB] border-none px-7">Login</button>
-          
-          <div className='text-black py-2'>
-            <p>Don't have an account yet?</p>
-            <p><a href="">Sign up</a></p>
-          </div>
-        </form>
-      </SignupStructure>
+        </div>
+      </div>
+
     </>
   )
 }

@@ -1,62 +1,63 @@
-import React from 'react'
-import SignupStructure from './SignupStructure'
+import React from 'react';
+import signup from '../../assets/images/sign2.png'
 
 const SignupUser = () => {
   return (
-    <>
-      <SignupStructure titleone="Create An Account to Join" titletwo=" Find a sister to chat with" maintit="Sign Up" desription="Support young women by offering a listening ear and guidance">
-        <form action="">
-          {/* Name */}
-          <div className="mb-6">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              What is your name?
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="name"
-                type="text"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
+   <>
+         <div className="bg-white min-h-screen flex items-center justify-center">
+           {/* Card section */}
+           <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
+   
+             {/* left Side */}
+            <div  className="lg:w-1/2 p-6  w-full">
+             <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
+              <div className='flex items-center justify-center'>
+              <img src={signup} alt="sign up svg" />
+             </div>
+   
             </div>
-          </div>
+             {/* Right Side */}
+             <div className="lg:w-1/2 p-6 flex text-gray-700 w-full lg:mt-5">
+   
+               <div>
+                 <p className="mb-4 text-3xl font-medium">Create an Account</p>
+                 <p className="text-sm mb-4">Please enter your details</p>
+                 <label className="text-sm mb-1" htmlFor="email">Name</label>
+                 <input
+                   id="name"
+                   type="text"
+                   placeholder="Enter email"
+                   className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                 />
 
-          {/* Email */}
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter your email
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#eaebff] rounded-full shadow-sm">
-              <input
-                id="email"
-                type="email"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
-
-          {/* Password */}
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Enter a password
-            </label>
-            <div className="flex items-center gap-2 p-3 bg-[#F8E9FE] rounded-full shadow-sm">
-              <input
-                id="password"
-                type="password"
-                placeholder="Type here"
-                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
-              />
-            </div>
-          </div>
-
-          {/* Submit */}
-          <button className="btn bg-[#5651AB] border-none px-7">Sign up</button>
-
-        </form>
-      </SignupStructure>
-    </>
+                 <label className="text-sm mb-1" htmlFor="email">Email address</label>
+                 <input
+                   id="email"
+                   type="email"
+                   placeholder="Enter email"
+                   className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                 />
+   
+                 <label className="text-sm mb-1" htmlFor="password">Password</label>
+                 <input
+                   id="password"
+                   type="password"
+                   placeholder="Enter password"
+                   className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                 />
+   
+                 <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                   <button className='cursor-pointer'>Sign Up</button>
+                 </div>
+   
+                 <p className='text-gray-600 mt-1 text-sm'>Have an account? <span className='text-[#BA68C8] underline italic'>Sign In</span></p>
+               </div>
+             </div>
+   
+           </div>
+         </div>
+   
+       </>
   )
 }
 
