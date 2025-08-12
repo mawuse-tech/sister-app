@@ -1,6 +1,6 @@
 import React from 'react'
 import SisterDashboard from './SisterDashboard'
-import DashboardStructure from './DashboardStructure'
+import DashboardStructure from '../../LayoutPage/DashboardStructure'
 
 const SisMessages = () => {
   return (

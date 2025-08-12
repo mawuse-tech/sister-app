@@ -1,6 +1,8 @@
 import React, { Children } from 'react'
 import { MdCheckCircle, MdDashboard, MdEdit, MdHistory, MdLogout, MdMessage, MdSettings } from 'react-icons/md'
 import { Outlet } from 'react-router-dom'
+
+
 const DashboardStructure = ({ title, children }) => {
   return (
     <>
@@ -19,7 +21,7 @@ const DashboardStructure = ({ title, children }) => {
               <div className='flex justify-center text-gray-700'>
                 <div>
                   <h3 className=' text-2xl py-4 font-medium'>{title}</h3>
-                  <Outlet/>
+                  <Outlet />
                 </div>
               </div>
             </div>
@@ -59,9 +61,9 @@ const DashboardStructure = ({ title, children }) => {
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <MdLogout className='text-[1.8rem]' />
-                    <span className='text-[1.2rem]'>Logout</span>
-                  </div>
+                  <MdLogout className='text-[1.8rem]' />
+                  <span className='text-[1.2rem]'>Logout</span>
+                </div>
               </ul>
             </div>
           </div>

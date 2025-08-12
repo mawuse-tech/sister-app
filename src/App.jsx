@@ -12,13 +12,15 @@ import SignupSister from './Pages/AuthPages/SignupSister'
 import SignupUser from './Pages/AuthPages/SignupUser'
 import SisterDashboard from './Pages/SisterPages/SisterDashboard'
 import SisMessages from './Pages/SisterPages/SisMessages'
-import DashboardStructure from './Pages/SisterPages/DashboardStructure'
+import DashboardStructure from './LayoutPage/DashboardStructure'
 import AvailabilityPage from './Pages/SisterPages/AvailabilityPage'
 import EditProfilePage from './Pages/SisterPages/EditProfilePage'
 import UserDashboard from './Pages/UserPages/UserDashboard'
 import ViewAllSisters from './Pages/UserPages/ViewAllSisters'
 import SisterProfile from './Pages/UserPages/SisterProfile'
 import ProfileLayout from './LayoutPage/ProfileLayout'
+import ViewAllChat from './Pages/UserPages/ViewAllChat'
+import ChatLayout from './LayoutPage/ChatLayout'
 
 
 const router = createBrowserRouter(([
@@ -59,6 +61,17 @@ const router = createBrowserRouter(([
       {
         path: "user",
         Component: SignupUser
+      },
+
+      {
+       path: "chatbox",
+       Component: ChatLayout,
+       children: [
+        {
+          index: true,
+          Component: ViewAllChat
+        }
+       ]
       },
 
       {

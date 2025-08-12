@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardStructure from './DashboardStructure'
+import DashboardStructure from '../../LayoutPage/DashboardStructure'
 import sisterone from '../../assets/images/teacher.jpg'
 
 const SisterDashboard = () => {

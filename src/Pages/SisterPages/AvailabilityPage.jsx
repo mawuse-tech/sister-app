@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardStructure from './DashboardStructure';
+import DashboardStructure from '../../LayoutPage/DashboardStructure';
 
 const daysOftheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
