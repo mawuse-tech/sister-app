@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-white shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -65,7 +65,7 @@ const Navbar = () => {
      <div className="navbar-end space-x-2">
  <NavLink to ="/login"> <button className="btn btn-outline text-purple-700">Login</button>
  </NavLink>
- <NavLink to="/signup"> 
+ <NavLink to="/user"> 
   <button className="btn btn-pink-500 text-purple-700 hover:opacity-1000 flex items-center gap-2">
     Sign Up
   </button>

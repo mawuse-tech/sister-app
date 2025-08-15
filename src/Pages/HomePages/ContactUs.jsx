@@ -1,25 +1,25 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import loginsvg from '../../assets/images/sign.png'
 
 const ContactUs = () => {
   return (
-    <div className="min-h-screen bg-base-100 flex flex-col items-center justify-center p-6">
-      <motion.h2
-        className="text-3xl font-bold mb-6 text-purple-800"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        Get in Touch
-      </motion.h2>
+    <>
+      <div className="bg-white min-h-screen flex items-center justify-center">
+        {/* Card section */}
+        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
 
-      <motion.form
-        className="bg-base-200 border border-base-300 rounded-box w-full max-w-md p-6 space-y-4 shadow-md"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <fieldset>
+          {/* left Side */}
+         <div  className="lg:w-1/2 p-6  w-full">
+          <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
+           <div className='flex items-center justify-center'>
+           <img src={loginsvg} alt="login svg" />
+          </div>
+
+         </div>
+          {/* Right Side */}
+          <div className="lg:w-1/2 p-6 flex text-gray-700 w-full mt-10">
+
+            <fieldset>
           <legend className="text-lg font-semibold mb-2">Your Details</legend>
 
           <label className="label" htmlFor="firstName">First Name</label>
@@ -56,25 +56,27 @@ const ContactUs = () => {
             className="input input-bordered w-full"
             placeholder="Phone Number"
           />
-        </fieldset>
+         
 
-        <fieldset>
+        
           <legend className="text-lg font-semibold mb-2">Message</legend>
           <textarea
             className="textarea textarea-bordered w-full h-24"
             placeholder="Type a message"
             required
           ></textarea>
-        </fieldset>
+         
+              <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                <button className='cursor-pointer'>Submit</button>
+              </div>
 
-        <div className="text-center">
-          <button type="submit" className="btn btn-neutral w-full hover:scale-105 transition-transform duration-200">
-            Submit
-          </button>
+          </fieldset>
+          </div>
         </div>
-      </motion.form>
-    </div>
-  );
-};
+      </div>
+
+    </>
+  )
+}
 
 export default ContactUs;
