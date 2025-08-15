@@ -117,9 +117,20 @@ const router = createBrowserRouter(([
           {
             path: "profile",
             Component: SisterProfile
-          }
+          },
         ]
-      }
+      },
+
+      {
+            path: "chat",
+            Component: ChatLayout,
+            children: [
+              {
+                index: true,
+                Component: ViewAllChat
+              }
+            ]
+          }
     ]
   }
 ]))

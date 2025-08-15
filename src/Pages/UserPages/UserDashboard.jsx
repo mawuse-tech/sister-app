@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiSearch } from 'react-icons/fi'
 import lawyer from '../../assets/images/teacher.jpg';
-import welcome from '../../assets/images/welcome.png';
+import { NavLink } from 'react-router-dom';
 
 const UserDashboard = () => {
   return (
@@ -71,7 +71,9 @@ const UserDashboard = () => {
               </div>
 
               <div className='flex justify-center'>
-                <p className='font-medium items-center italic underline'>[View all chats...]</p>
+               <NavLink to="/chat">
+                 <p className='font-medium items-center italic underline'>[View all chats...]</p>
+               </NavLink>
               </div>
 
             </div>
@@ -79,7 +81,9 @@ const UserDashboard = () => {
 
           <div className='flex flex-col gap-1'>
               <div className='flex justify-center'>
-                <p className='text-[1.2rem] my-3 font-medium'>View all sisters...</p>
+                <NavLink to="/allsisters">
+                <p className='text-[1.2rem] my-3 font-medium border-2 rounded p-1'>View all sisters...</p>
+                </NavLink>
               </div>
 
               <div className='flex justify-center'>
@@ -126,10 +130,6 @@ const UserDashboard = () => {
                     <p className='font-medium underline italic'>[Start chat...]</p>
                   </div>
                 </div>
-              </div>
-
-              <div className='flex justify-center'>
-                <p className='font-medium items-center underline italic'>[Click to view all...]</p>
               </div>
 
             </div>

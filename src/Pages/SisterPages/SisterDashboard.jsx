@@ -1,6 +1,7 @@
 import React from 'react'
 import DashboardStructure from '../../LayoutPage/DashboardStructure'
 import sisterone from '../../assets/images/teacher.jpg'
+import { NavLink } from 'react-router-dom';
 
 const SisterDashboard = () => {
   return (
@@ -42,7 +43,9 @@ const SisterDashboard = () => {
         </div>
       </div>
 
-      <span className='font-medium italic underline text-[#BA68C8] mb-4 self-center'>[View all messages...]</span>
+     <NavLink to="/sisdash/sismessage">
+       <span className='font-medium italic underline text-[#BA68C8] mb-4 self-center'>[View all messages...]</span>
+     </NavLink>
     </div>
   );
 }
