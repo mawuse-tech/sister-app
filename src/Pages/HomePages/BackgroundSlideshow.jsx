@@ -28,7 +28,7 @@ const BackgroundSlideshow = () => {
         absolute: "0",
         top: "0",
         left: "0",
-        zIndex: "10",
+        zIndex: "3",
         height: "100vh",
         backgroundSize: "cover",
         backgroundPosition: "center",

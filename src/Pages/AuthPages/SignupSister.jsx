@@ -56,7 +56,7 @@ const SignupSister = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm mb-1" htmlFor="password">Proffession</label>
+                  <label className="text-sm mb-1" htmlFor="password">Profession</label>
                   <input
                     type="text"
                     placeholder="Enter your proffession"

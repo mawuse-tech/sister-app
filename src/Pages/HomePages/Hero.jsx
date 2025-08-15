@@ -7,7 +7,11 @@ import CountUp from "react-countup";
 import b1Image from "../../assets/images/b1.png";
 import twoWildImage from "../../assets/images/2wild.png";
 import onekImage from "../../assets/images/onek.png";
- 
+import { NavLink } from "react-router-dom";
+import img6 from "../../assets/images/img6.jpg";
+import twomos from "../../assets/images/twomos.png";
+import kor from "../../assets/images/kor.png";
+
 const testimonials = [
   { text: "This community helped me build my confidence and find new friends.", name: "Ama, Ghana" },
   { text: "I landed a new job through a SheRise networking event!", name: "Grace, Kenya" },
@@ -66,7 +70,7 @@ const Hero = () => {
 
  
   return (
-    <div>
+    <div className="bg-white">
       {/* Hero Section */}
       <div className="hero min-h-screen bg-base-200 relative rounded-2xl">
         <div className="absolute inset-0 z-0">
@@ -92,9 +96,11 @@ const Hero = () => {
                   Join Now
                 </button>
               </Link>
+              <NavLink to="/signup"> 
               <button className="px-6 py-3 rounded-full border border-white hover:bg-white hover:text-purple-700 transition">
-                Learn More
+                Volunteer
               </button>
+              </NavLink>
             </div>
           </motion.div>
         </div>
@@ -383,25 +389,70 @@ const Hero = () => {
 <section className="py-16 px-4 bg-gray-50">
   <h2 className="text-4xl font-bold text-center text-purple-800 mb-10">Latest Articles</h2>
   
-  <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-    {/* Example Article Card */}
-    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
+<div className="px-4 sm:px-6 lg:px-8 py-8">
+  <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+    {/* Card 1 */}
+    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl duration-300">
       <img
-        src="https://source.unsplash.com/400x200/?wellbeing,mental"
+        src={twomos}
         alt="Mental Health"
-        className="w-full h-48 object-cover"
+        className="w-full h-48 object-cover sm:h-56 md:h-64"
       />
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">Mental Health Tips</h3>
-        <p className="text-sm text-gray-600">
+      <div className="p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-purple-700 mb-2">
+          Mental Health Tips
+        </h3>
+        <p className="text-sm sm:text-base text-gray-600">
           Explore simple, practical routines to boost your wellbeing and stay balanced every day.
         </p>
-        <button className="mt-4 text-sm font-medium text-pink-500 hover:underline">
+        <button className="mt-4 text-sm sm:text-base font-medium text-pink-500 hover:underline">
+          Read More →
+        </button>
+      </div>
+    </div>
+
+    {/* Card 2 */}
+    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl duration-300">
+      <img
+        src={img6}
+        alt="Mental Health"
+        className="w-full h-48 object-cover sm:h-56 md:h-64"
+      />
+      <div className="p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-purple-700 mb-2">
+         Financial Literacy
+        </h3>
+        <p className="text-sm sm:text-base text-gray-600">
+          Explore simple, practical routines to boost your wellbeing and stay balanced every day.
+        </p>
+        <button className="mt-4 text-sm sm:text-base font-medium text-pink-500 hover:underline">
+          Read More →
+        </button>
+      </div>
+    </div>
+
+    {/* Card 3 */}
+    <div className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-xl duration-300">
+      <img
+        src={kor}
+        alt="Mental Health"
+        className="w-full h-48 object-cover sm:h-56 md:h-64"
+      />
+      <div className="p-4 sm:p-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-purple-700 mb-2">
+          Relationship Advice
+        </h3>
+        <p className="text-sm sm:text-base text-gray-600">
+          Explore simple, practical routines to boost your wellbeing and stay balanced every day.
+        </p>
+        <button className="mt-4 text-sm sm:text-base font-medium text-pink-500 hover:underline">
           Read More →
         </button>
       </div>
     </div>
   </div>
+</div>
+
 </section>
 
       
