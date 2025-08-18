@@ -5,11 +5,11 @@ const BackgroundSlideshow = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    "/img1.png",
+    // "/img1.png",
     "/img2.png",
     "/img3.png",
-    "/img4.png",
-    "/img5.avif",
+    // "/img4.png",
+    // "/img5.avif",
     "/img6.png",
     
 ];
