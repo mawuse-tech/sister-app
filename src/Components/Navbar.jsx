@@ -47,7 +47,7 @@ const Navbar = () => {
 
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-purple-800 font-italic">
+        <ul className="menu menu-horizontal px-1 text-[#BA68C8] font-italic">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -63,10 +63,10 @@ const Navbar = () => {
         </ul>
       </div>
      <div className="navbar-end space-x-2">
- <NavLink to ="/login"> <button className="btn btn-outline text-purple-700">Login</button>
+ <NavLink to ="/login"> <button className="btn btn-pink-500 text-[#BA68C8] hover:opacity-1000 flex items-center gap-2 bg-white border-[#BA68C8]">Login</button>
  </NavLink>
  <NavLink to="/user"> 
-  <button className="btn btn-pink-500 text-purple-700 hover:opacity-1000 flex items-center gap-2">
+  <button className="btn btn-pink-500 text-[#BA68C8] hover:opacity-1000 flex items-center gap-2 bg-white border-[#BA68C8]">
     Sign Up
   </button>
   </NavLink>

@@ -34,7 +34,7 @@ const Footer = () => {
   return (
     <footer className="bg-purple-100">
       {/* Continuous Logo Slider */}
-      <div className="overflow-hidden py-6 bg-purple-100">
+      {/* <div className="overflow-hidden py-6 bg-purple-100">
         <div
           ref={sliderRef}
           className="flex gap-6 overflow-x-hidden no-scrollbar"
@@ -49,10 +49,10 @@ const Footer = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Main Footer */}
-      <div className="bg-[#BA68C8] text-white py-10 px-8 md:px-16">
+      <div className="bg-[#f1dcf5] text-gray-800 py-10 px-8 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About Us */}
           <div>
@@ -120,7 +120,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 border-t border-pink-200 pt-4 text-center text-sm text-pink-100">
+        <div className="mt-8 border-t border-pink-200 pt-4 text-center text-sm text-gray-800">
           © Copyright Sisters 2025 | All Rights Reserved | Design by Trendx Team
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import sisterone from '../../assets/images/teacher.jpg'
+import { NavLink } from 'react-router-dom'
 
 const SisterProfile = () => {
   return (
@@ -28,9 +29,13 @@ const SisterProfile = () => {
                 <p>Psychologist</p>
                 <p>Accra, Ghana</p>
                 <p>nkunim1234@gmail.com</p>
-                <span className="bg-[#BA68C8] px-4 py-1 w-fit mx-auto lg:mx-0 rounded text-white text-sm cursor-pointer">
+
+               <NavLink to="/chat">
+                 <span className="bg-[#BA68C8] px-4 py-1 w-fit mx-auto lg:mx-0 rounded text-white text-sm cursor-pointer">
                   chat with me
                 </span>
+               </NavLink>
+
               </div>
             </div>
 

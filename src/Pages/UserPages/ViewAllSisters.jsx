@@ -2,16 +2,20 @@ import React, { useState } from 'react'
 import { FiChevronDown, FiSearch } from 'react-icons/fi'
 
 import teacher from "../../assets/images/teacher.jpg"
-import indicator from 'daisyui/components/indicator'
+import testi from "../../assets/images/testi.png"
+import onek from "../../assets/images/onek.png"
+import wo from "../../assets/images/1wo.png"
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 
-const sisterData = [
+export const sisterData = [
   {
     id: 1,
-    image: teacher,
-    name: "Perfect Patience Dah",
+    image: testi,
+    name: "Perfect Patience",
     proffession: "Teacher",
     available: "availabe",
+    message: "hi perfect thanks s...."
 
 
   },
@@ -20,15 +24,17 @@ const sisterData = [
     image: teacher,
     name: "Efuwa Mensah York",
     proffession: "Doctor",
-    available: "not Available"
+    available: "not Available",
+    message: "Efuwa are you ava...."
 
   },
   {
     id: 3,
-    image: teacher,
+    image: onek,
     name: "Nkunim Asaah Osei",
     proffession: "Counsellor",
     available: "available",
+    message: "i contaced you yest...."
 
   },
   {
@@ -37,14 +43,16 @@ const sisterData = [
     name: "Eunice Asamoah",
     proffession: "Lawyer",
     available: "not available",
+    message: "hello please i am a...."
 
   },
   {
     id: 5,
-    image: teacher,
+    image: wo,
     name: "Eunice Asamoah",
     proffession: "Lawyer",
     available: "not available",
+    message: "sorry about what...."
 
   },
   {
@@ -164,12 +172,18 @@ const ViewAllSisters = () => {
               <p className="text-center font-medium text-sm text-white mb-2">{sister.proffession}</p>
 
               <div className="flex justify-center gap-4 mb-3">
-                <span className="text-white border hover:text-white transition-all duration-200 rounded px-3 py-1 text-sm font-semibold cursor-pointer">
-                  Chat
-                </span>
-                <span className="text-white border shadow-2xl hover:text-white transitio rounded px-3 py-1 text-sm font-semibold cursor-pointer">
+                <NavLink to="/chat">
+                  <span className="text-white border hover:text-white transition-all duration-200 rounded px-3 py-1 text-sm font-semibold cursor-pointer">
+                    Chat
+                  </span>
+                </NavLink>
+
+               <NavLink to="/allsisters/profile">
+                 <span className="text-white border shadow-2xl hover:text-white transitio rounded px-3 py-1 text-sm font-semibold cursor-pointer">
                   View Profile
                 </span>
+               </NavLink>
+
               </div>
 
               <span className="block text-center mt-2 font-semibold text-sm bg-[#F3F3FC] text-gray-700 px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2">
