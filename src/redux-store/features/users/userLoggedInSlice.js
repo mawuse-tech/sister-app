@@ -1,31 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser } from "./userThunks";
+import { isUserLoggedIn } from "./userThunks";
 
-
-export const registerSlice = createSlice({
-    name: 'register',
+export const isUserLoggedInSlice = createSlice({
+    name: 'isUserLoggedInSlice',
     initialState: {
-        users: [],
+        user: null,
         loading: false,
         error: null
     },
 
     extraReducers: (builder) => {
         builder
-            .addCase(registerUser.pending, (state) => {
+            .addCase(isUserLoggedIn.pending, (state) => {
                 state.loading = true
             })
-            .addCase(registerUser.fulfilled, (state, action) => {
+            .addCase(isUserLoggedIn.fulfilled, (state, action) => {
                 console.log(action.payload)
                 state.loading = false,
-                    state.users.push(action.payload)
+                    state.user = action.payload.loggedInUser
             })
-            .addCase(registerUser.rejected, (state, action) => {
+            .addCase(isUserLoggedIn.rejected, (state, action) => {
                 state.loading = false,
                     state.error = action.payload || action.error.message
             })
     }
-});
+})
 
-export default registerSlice.reducer
-
+export default isUserLoggedInSlice.reducer

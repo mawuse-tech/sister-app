@@ -2,8 +2,11 @@ import React from 'react'
 import { FiSearch } from 'react-icons/fi'
 import lawyer from '../../assets/images/teacher.jpg';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserDashboard = () => {
+const {user} = useSelector((store) => store.isUserLoggedIn) 
+
   return (
     <>
       {/* Body Section */}
@@ -13,7 +16,7 @@ const UserDashboard = () => {
           <div className='w-full p-6'>
             <div className='flex justify-center pt-10'>
               <div>
-                <p className="mb-4 text-3xl font-medium items-center">Welcome Linda</p>
+                <p className="mb-4 text-3xl font-medium items-center">Welcome {user.firstName}</p>
                 <p>There are many variations of passages of Lorem Ipsum available</p>
               </div>
             </div>

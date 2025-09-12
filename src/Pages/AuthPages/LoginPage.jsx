@@ -1,14 +1,16 @@
 import React from 'react';
 import loginsvg from '../../assets/images/sign.png'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../../redux-store/features/users/userThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { loginUser } from '../../redux-store/features/users/userThunks';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { error, loading } = useSelector((store) => store.login)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,12 +19,17 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const result = await dispatch(loginUser({email, password})).unwrap();
-      alert("Login successful!");
+      const response = await dispatch(loginUser({ email, password })).unwrap();
+
+      if (response.success === true) {
+        toast.success("Login successful!");
+      };
+
+      navigate('/userdash')
 
     } catch (error) {
       console.log(error)
-      alert(error); // error comes from rejectWithValue
+      toast.error(error); // error comes from rejectWithValue
     }
   }
 
@@ -45,36 +52,54 @@ const LoginPage = () => {
 
             <div>
               <p className="mb-4 text-3xl font-medium">Welcome Back</p>
-              <p className="text-sm mb-4">Please enter your details</p>
+
+              {/* error message */}
+              {error && <p className="text-red-500 text-sm">{error}</p>}
 
               <form action="" onSubmit={hadndleSubmit}>
-                
-              <label className="text-sm mb-1" htmlFor="email">Email address</label>
-              <input
-                id="email"
-                type="text"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
-              />
 
-              <label className="text-sm mb-1" htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
-              />
+                <label className="text-sm mb-1" htmlFor="email">Email address</label>
+                <input
+                  id="email"
+                  type="text"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                />
 
-              <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
-                <button className='cursor-pointer' type='submit'>Sign In</button>
-              </div>
+                <label className="text-sm mb-1" htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                />
+
+                <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
+                      }`}
+                  >
+                    Sign In
+                  </button>
+
+                </div>
               </form>
 
-              <p className='text-gray-600 mt-1 text-sm'>Don't have an account? <span className='text-[#BA68C8] underline italic'>Sign up</span></p>
+              <div className='flex gap-4 mt-4'>
+                <NavLink to='/signup'>
+                  <p className='text-gray-600 mt-1 text-sm'>Don't have an account? <span className='text-[#BA68C8] underline italic'>Sign up</span></p>
+                </NavLink>
+
+                <NavLink to='/forgotpassword'>
+                  <span className='text-[#BA68C8] underline italic'>Forgot password?</span>
+                </NavLink>
+              </div>
             </div>
           </div>
 
