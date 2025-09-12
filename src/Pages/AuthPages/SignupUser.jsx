@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import signup from '../../assets/images/sign2.png'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../../../redux-store/features/users/userThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../redux-store/features/users/userThunks';
+import toast from 'react-hot-toast';
+
 
 const SignupUser = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { error, loading } = useSelector((store) => store.signup)
 
   const [formData, setFormData] = React.useState({
     firstName: '',
@@ -20,27 +23,15 @@ const SignupUser = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const { firstName, lastName, email, password, confirmPassword } = formData;
-
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      alert("All fields are required!");
-      return 
-    }
-
-    if (password !== confirmPassword){
-      alert('password mismatch')
-      return
-    }
-
     try {
       const result = await dispatch(registerUser(formData)).unwrap();
-      console.log(result)
-      alert('user signed up successfully')
+      // console.log(result)
+      toast.success('user signed up successfully')
       navigate("/login")
 
     } catch (err) {
-      console.error("Registration error:", err);
-      alert(err); 
+
+      toast.error(err);
     }
   }
 
@@ -64,7 +55,8 @@ const SignupUser = () => {
 
             <div>
               <p className="mb-4 text-3xl font-medium">Create an Account</p>
-              <p className="text-sm mb-4">Please enter your details</p>
+
+              {error && <p className="text-red-500 text-sm">{error}</p>}
 
               <form action="" onSubmit={handleSubmit}>
                 <div className='flex gap-2'>
@@ -132,7 +124,14 @@ const SignupUser = () => {
                 </div>
 
                 <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
-                  <button className='cursor-pointer' type='submit'>Sign Up</button>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
+                      }`}
+                  >
+                    Sign up
+                  </button>
                 </div>
               </form>
 

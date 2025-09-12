@@ -1,142 +1,200 @@
-
-import React, { Children } from 'react'
-import Hero from './Pages/HomePages/Hero'
+import React, { useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Component } from 'react'
+import { useDispatch } from 'react-redux'
+import { isUserLoggedIn } from './redux-store/features/users/userThunks'
+
 import RootLayout from './LayoutPage/RootLayout'
+import DashboardStructure from './LayoutPage/DashboardStructure'
+import ProfileLayout from './LayoutPage/ProfileLayout'
+import ChatLayout from './LayoutPage/ChatLayout'
+
+import Hero from './Pages/HomePages/Hero'
 import AboutUs from './Pages/HomePages/AboutUs'
 import ContactUs from './Pages/HomePages/ContactUs'
 import Services from './Pages/HomePages/Services'
 import LoginPage from './Pages/AuthPages/LoginPage'
 import SignupSister from './Pages/AuthPages/SignupSister'
 import SignupUser from './Pages/AuthPages/SignupUser'
+import ForgotPassword from './Pages/AuthPages/ForgotPassword'
+import ResetPassword from './Pages/AuthPages/ResetPassword'
+
 import SisterDashboard from './Pages/SisterPages/SisterDashboard'
 import SisMessages from './Pages/SisterPages/SisMessages'
-import DashboardStructure from './LayoutPage/DashboardStructure'
 import AvailabilityPage from './Pages/SisterPages/AvailabilityPage'
 import EditProfilePage from './Pages/SisterPages/EditProfilePage'
+
 import UserDashboard from './Pages/UserPages/UserDashboard'
 import ViewAllSisters from './Pages/UserPages/ViewAllSisters'
 import SisterProfile from './Pages/UserPages/SisterProfile'
-import ProfileLayout from './LayoutPage/ProfileLayout'
 import ViewAllChat from './Pages/UserPages/ViewAllChat'
-import ChatLayout from './LayoutPage/ChatLayout'
 
+import { PrivateRoute, PublicRoute } from './helpers/ProtectRoute'
 
-const router = createBrowserRouter(([
+const router = createBrowserRouter([
   {
-    index: "/",
-    Component: RootLayout,
+    path: "/",
+    element: <RootLayout />,
     children: [
       {
         index: true,
-        Component: Hero
-      },
+        element: (
+          <PublicRoute>
+            <Hero />
+            </PublicRoute>
+        )
 
+      },
       {
         path: "about",
-        Component: AboutUs
-      },
+        element: (
+          <PublicRoute>
+            <AboutUs />
+          </PublicRoute>
+        )
 
+      },
       {
         path: "contact",
-        Component: ContactUs
+        element: (
+          <PublicRoute>
+             <ContactUs />
+          </PublicRoute>
+        )
       },
-
       {
         path: "services",
-        Component: Services
+        element: (
+          <PublicRoute>
+            <Services />
+          </PublicRoute>
+        )
       },
-
       {
         path: "login",
-        Component: LoginPage
+        element: (
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        )
       },
-
+      {
+        path: "volunteer",
+        element: (
+          <PublicRoute>
+            <SignupSister />
+          </PublicRoute>
+        )
+      },
       {
         path: "signup",
-        Component: SignupSister
+        element: (
+          <PublicRoute>
+            <SignupUser />
+          </PublicRoute>
+        )
       },
-
       {
-        path: "user",
-        Component: SignupUser
+        path: "forgotpassword",
+        element: (
+          <PublicRoute>
+            <ForgotPassword />
+          </PublicRoute>
+        )
       },
-
       {
-       path: "chatbox",
-       Component: ChatLayout,
-       children: [
-        {
-          index: true,
-          Component: ViewAllChat
-        }
-       ]
+        path: "resetpassword/:token",
+        element: (
+          <PublicRoute>
+            <ResetPassword />
+          </PublicRoute>
+        )
       },
-
       {
-        path: "sisdash",
-        Component: DashboardStructure,
-        children: [
-         {
-           index: true,
-           Component: SisterDashboard
-         },
-
-         {
-          path: "sismessage",
-          Component: SisMessages
-         },
-
-         {
-          path: "available",
-          Component: AvailabilityPage
-         },
-
-         {
-          path: "edit",
-          Component: EditProfilePage
-         }
-        ]
-      },
-
-      {
-        path: "userdash",
-        Component: UserDashboard
-      },
-
-      {
-        path: "allsisters",
-        Component: ProfileLayout,
+        path: "chatbox",
+        element: <ChatLayout />,
         children: [
           {
             index: true,
-            Component: ViewAllSisters
-          },
-
-          {
-            path: "profile",
-            Component: SisterProfile
-          },
+            element: (
+              <PrivateRoute>
+                <ViewAllChat />
+              </PrivateRoute>
+            )
+          }
         ]
       },
-
       {
-            path: "chat",
-            Component: ChatLayout,
-            children: [
-              {
-                index: true,
-                Component: ViewAllChat
-              }
-            ]
+        path: "sisdash",
+        element: (
+          <PrivateRoute>
+            <DashboardStructure />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            index: true,
+            element: <SisterDashboard />
+          },
+          {
+            path: "sismessage",
+            element: <SisMessages />
+          },
+          {
+            path: "available",
+            element: <AvailabilityPage />
+          },
+          {
+            path: "edit",
+            element: <EditProfilePage />
           }
+        ]
+      },
+      {
+        path: "userdash",
+        element: (
+          <PrivateRoute>
+            <UserDashboard />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "allsisters",
+        element: (
+          <PrivateRoute>
+            <ProfileLayout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            index: true,
+            element: <ViewAllSisters />
+          },
+          {
+            path: "profile",
+            element: <SisterProfile />
+          }
+        ]
+      },
+      {
+        path: "chat",
+        element: (
+          <PrivateRoute>
+            <ViewAllChat />
+          </PrivateRoute>
+        )
+      }
     ]
   }
-]))
+])
 
 const App = () => {
-  return <RouterProvider router={router}/>
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(isUserLoggedIn())
+  }, [dispatch])
+
+  return <RouterProvider router={router} />
 }
 
 export default App
