@@ -1,146 +1,149 @@
-import React from 'react'
-import { FiSearch } from 'react-icons/fi'
-import lawyer from '../../assets/images/teacher.jpg';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import lawyer from "../../assets/images/teacher.jpg";
+import { FiMessageCircle, FiUsers, FiHeart } from "react-icons/fi";
 
 const UserDashboard = () => {
-const {user} = useSelector((store) => store.isUserLoggedIn) 
+  const { user } = useSelector((store) => store.isUserLoggedIn);
 
   return (
-    <>
-      {/* Body Section */}
-      <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700 ">
+    <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700">
+      <div className="bg-white w-full max-w-6xl rounded-xl shadow-md p-8 space-y-8">
 
-        <div className='bg-white w-full max-w-6xl rounded-xl flex flex-col  overflow-hidden justify-center lg:w-[70rem]  '>
-          <div className='w-full p-6'>
-            <div className='flex justify-center pt-10'>
-              <div>
-                <p className="mb-4 text-3xl font-medium items-center">Welcome {user.firstName}</p>
-                <p>There are many variations of passages of Lorem Ipsum available</p>
+        <div className="text-center">
+          <h2 className="text-3xl font-semibold">
+            Welcome, <span className="text-[#BA68C8]">{user?.firstName}</span>
+          </h2>
+          <p className="text-gray-600 mt-2">
+            We’re glad to have you back. Here’s what’s happening:
+          </p>
+        </div>
+
+
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Recent Chats */}
+          <div className="bg-[#f1d7f5] rounded-xl p-6 shadow-sm">
+            <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
+              <FiMessageCircle className="text-[#BA68C8]" /> Recent Chats
+            </h3>
+
+
+            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
+              <div className="flex gap-4 items-center">
+                <div className="avatar">
+                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
+                    <img src={lawyer} alt="Sister Avatar" />
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold">Nkunim Asaa Osei</p>
+                  <p className="text-sm text-gray-500">Psychologist</p>
+                </div>
               </div>
+              <NavLink to="/chat">
+                <span className="text-[#BA68C8] underline text-sm">
+                  Continue
+                </span>
+              </NavLink>
             </div>
-
-            {/* body */}
-            <div className='flex flex-col gap-1'>
-              <div className='flex justify-center'>
-                <p className='text-[1.2rem] my-3 font-medium'>Recently contacted sisters...</p>
-              </div>
-
-              <div className='flex justify-center'>
-                <div className="flex justify-around text-gray-700 bg-[#f1d7f5] w-full lg:w-2/3 rounded-2xl p-4 items-center ">
-                  {/* Avatar Image */}
-                  <div className='flex gap-10'>
-                    <div className="avatar">
-                      <div className="w-16 rounded-full ring-white ring-offset-white ring-2">
-                        <img src={lawyer} alt="Sister Avatar" />
-                      </div>
-                    </div>
-
-                    {/* Avatar Details */}
-                    <div className="text-[1.1rem] flex flex-col justify-center">
-                      <p className="font-semibold">Nkunim Asaa Osei</p>
-                      <p>Psychologist</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className='font-medium underline italic'>[Continue chat...]</p>
+            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
+              <div className="flex gap-4 items-center">
+                <div className="avatar">
+                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
+                    <img src={lawyer} alt="Sister Avatar" />
                   </div>
                 </div>
-              </div>
-
-              <div className='flex justify-center'>
-                <div className="flex justify-around text-gray-700 bg-[#f1d7f5] w-full lg:w-2/3 rounded-2xl p-4 items-center ">
-                  {/* Avatar Image */}
-                  <div className='flex gap-10'>
-                    <div className="avatar">
-                      <div className="w-16 rounded-full ring-white ring-offset-white ring-2">
-                        <img src={lawyer} alt="Sister Avatar" />
-                      </div>
-                    </div>
-
-                    {/* Avatar Details */}
-                    <div className=" text-[1.1rem] flex flex-col justify-center">
-                      <p className="font-semibold">Nkunim Asaa Osei</p>
-                      <p>Psychologist</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className='font-medium underline italic'>[Continue chat...]</p>
-                  </div>
+                <div>
+                  <p className="font-semibold">Nkunim Asaa Osei</p>
+                  <p className="text-sm text-gray-500">Psychologist</p>
                 </div>
               </div>
-
-              <div className='flex justify-center'>
-               <NavLink to="/chat">
-                 <p className='font-medium items-center italic underline'>[View all chats...]</p>
-               </NavLink>
+              <NavLink to="/chat">
+                <span className="text-[#BA68C8] underline text-sm">
+                  Continue
+                </span>
+              </NavLink>
+            </div>
+            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
+              <div className="flex gap-4 items-center">
+                <div className="avatar">
+                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
+                    <img src={lawyer} alt="Sister Avatar" />
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold">Nkunim Asaa Osei</p>
+                  <p className="text-sm text-gray-500">Psychologist</p>
+                </div>
               </div>
+              <NavLink to="/chat">
+                <span className="text-[#BA68C8] underline text-sm">
+                  Continue
+                </span>
+              </NavLink>
+            </div>
+            
 
+            <div className="text-center mt-3">
+              <NavLink to="/chat">
+                <span className="text-[#BA68C8] underline italic">
+                  View all chats...
+                </span>
+              </NavLink>
             </div>
           </div>
 
-          <div className='flex flex-col gap-1'>
-              <div className='flex justify-center'>
-                <NavLink to="/allsisters">
-                <p className='text-[1.2rem] my-3 font-medium border-2 rounded p-1'>View all sisters...</p>
-                </NavLink>
-              </div>
 
-              <div className='flex justify-center'>
-                <div className="flex justify-around text-white bg-[#BA68C8] w-full lg:w-2/3 rounded-2xl p-4 items-center ">
-                  {/* Avatar Image */}
-                  <div className='flex gap-10'>
-                    <div className="avatar">
-                      <div className="w-16 rounded-full ring-white ring-offset-white ring-2">
-                        <img src={lawyer} alt="Sister Avatar" />
-                      </div>
-                    </div>
+          <div className="bg-[#BA68C8] rounded-xl p-6 text-white shadow-sm">
+            <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
+              <FiUsers /> Sisters Directory
+            </h3>
 
-                    {/* Avatar Details */}
-                    <div className="text-white text-[1.1rem] flex flex-col justify-center">
-                      <p className="font-semibold">Nkunim Asaa Osei</p>
-                      <p>Psychologist</p>
-                    </div>
-                  </div>
 
-                  <div>
-                    <p className='font-medium underline italic'>[Start chat...]</p>
+            <div className="flex items-center justify-between bg-[#a64db3] p-4 rounded-lg mb-3 shadow">
+              <div className="flex gap-4 items-center">
+                <div className="avatar">
+                  <div className="w-14 rounded-full ring-2 ring-white">
+                    <img src={lawyer} alt="Sister Avatar" />
                   </div>
                 </div>
-              </div>
-
-              <div className='flex justify-center'>
-                <div className="flex justify-around text-white bg-[#BA68C8] w-full lg:w-2/3 rounded-2xl p-4 items-center ">
-                  {/* Avatar Image */}
-                  <div className='flex gap-10'>
-                    <div className="avatar">
-                      <div className="w-16 rounded-full ring-white ring-offset-white ring-2">
-                        <img src={lawyer} alt="Sister Avatar" />
-                      </div>
-                    </div>
-
-                    {/* Avatar Details */}
-                    <div className="text-white text-[1.1rem] flex flex-col justify-center">
-                      <p className="font-semibold">Nkunim Asaa Osei</p>
-                      <p>Psychologist</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className='font-medium underline italic'>[Start chat...]</p>
-                  </div>
+                <div>
+                  <p className="font-semibold">Nkunim Asaa Osei</p>
+                  <p className="text-sm">Psychologist</p>
                 </div>
               </div>
-
+              <NavLink to="/chat">
+                <span className="underline text-sm">Start Chat</span>
+              </NavLink>
             </div>
+
+            <div className="text-center mt-3">
+              <NavLink to="/allsisters">
+                <span className="underline italic">View all sisters...</span>
+              </NavLink>
+            </div>
+
+            {/* Volunteer Section */}
+            <div className="bg-[#fef6fb] border border-[#BA68C8] rounded-xl p-6 shadow-md text-center">
+              <h3 className="text-2xl font-semibold text-[#BA68C8] mb-2 flex items-center justify-center gap-2">
+                <FiHeart /> Become a Volunteer
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Share your knowledge, support young women, and make a difference.
+              </p>
+              <NavLink to="/volunteer">
+                <button className="px-6 py-2 bg-[#BA68C8] text-white rounded-lg shadow hover:bg-[#9c4eb0] transition">
+                  Fill Volunteer Form
+                </button>
+              </NavLink>
+            </div>
+          </div>
         </div>
 
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default UserDashboard
+export default UserDashboard;

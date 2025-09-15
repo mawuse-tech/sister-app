@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../redux-store/features/users/userThunks";
+import { isUserLoggedIn, logout } from "../redux-store/features/users/userThunks";
 import toast from "react-hot-toast";
 
 
@@ -15,15 +15,16 @@ const Navbar = () => {
 
   async function logoutUser() {
     try {
-  
+
       const userLogout = await dispatch(logout()).unwrap();
       console.log("--------", userLogout);
 
       if (userLogout.success === true) {
         toast.success(userLogout.message);
-      } 
-      navigate("/");
-      
+        dispatch(isUserLoggedIn())
+        navigate("/");
+      }
+
     } catch (error) {
       console.log(error);
       toast.error(error.message);

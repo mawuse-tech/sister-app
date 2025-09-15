@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import signup from '../../assets/images/sign2.png'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../redux-store/features/users/userThunks';
+import { isUserLoggedIn, registerUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
 
 
@@ -27,6 +27,7 @@ const SignupUser = () => {
       const result = await dispatch(registerUser(formData)).unwrap();
       // console.log(result)
       toast.success('user signed up successfully')
+      dispatch(isUserLoggedIn())
       navigate("/login")
 
     } catch (err) {

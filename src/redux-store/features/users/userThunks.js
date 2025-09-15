@@ -57,3 +57,16 @@ export const isUserLoggedIn = createAsyncThunk('loaduser', async (_, thunkAPI) =
         return thunkAPI.rejectWithValue(error.response?.data?.message)
     }
 });
+
+export const volunteer = createAsyncThunk('volunteer', async(formData, {rejectWithValue}) =>{
+    try {
+        const response = await api.post('/auth/volunteer', formData, {
+            headers:  { "Content-Type": "multipart/form-data" }
+        })
+        console.log(response.data)
+        return response.data
+
+    } catch (err) {
+        return rejectWithValue(err.response?.data || err.message);
+    }
+})

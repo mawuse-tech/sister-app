@@ -3,7 +3,7 @@ import loginsvg from '../../assets/images/sign.png'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loginUser } from '../../redux-store/features/users/userThunks';
+import { isUserLoggedIn, loginUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
@@ -20,12 +20,13 @@ const LoginPage = () => {
 
     try {
       const response = await dispatch(loginUser({ email, password })).unwrap();
+      console.log('===', response.data)
 
       if (response.success === true) {
         toast.success("Login successful!");
+        dispatch(isUserLoggedIn())
+          navigate('/userdash')
       };
-
-      navigate('/userdash')
 
     } catch (error) {
       console.log(error)
