@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import reset from '../../assets/images/reset.png'
+import reset from '../../assets/images/rest.png'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import api from '../../config/axios';
 import toast from 'react-hot-toast';
