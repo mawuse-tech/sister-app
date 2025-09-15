@@ -15,13 +15,14 @@ export const isUserLoggedInSlice = createSlice({
                 state.loading = true
             })
             .addCase(isUserLoggedIn.fulfilled, (state, action) => {
-                console.log(action.payload)
+                // console.log(action.payload)
                 state.loading = false,
-                    state.user = action.payload.loggedInUser
+                    state.user = action.payload?.loggedInUser
             })
             .addCase(isUserLoggedIn.rejected, (state, action) => {
                 state.loading = false,
-                    state.error = action.payload || action.error.message
+                    state.user = null
+                state.error = action.payload || action.error.message
             })
     }
 })

@@ -7,10 +7,12 @@ import CountUp from "react-countup";
 import b1Image from "../../assets/images/b1.png";
 import twoWildImage from "../../assets/images/2wild.png";
 import onekImage from "../../assets/images/onek.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import img6 from "../../assets/images/img6.jpg";
 import twomos from "../../assets/images/twomos.png";
 import kor from "../../assets/images/kor.png";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const testimonials = [
   { text: "This community helped me build my confidence and find new friends.", name: "Ama, Ghana" },
@@ -20,6 +22,20 @@ const testimonials = [
 
 
 const Hero = () => {
+
+const {user} = useSelector((store) => store. isUserLoggedIn)
+const navigate = useNavigate()
+
+const handleVolunteerClick = () => {
+  if (!user) {
+    toast.error("Please login first to volunteer!");
+    return;
+  }
+
+  // ✅ only runs if user exists
+  navigate("/volunteer");
+};
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [ articles, setArticles ] = useState([]);
 
@@ -96,11 +112,11 @@ const Hero = () => {
                   Join Now
                 </button>
               </Link>
-              <NavLink to="/signup"> 
-              <button className="px-6 py-3 rounded-full border border-white hover:bg-white hover:text-purple-700 transition">
+              
+              <button type="button" onClick={handleVolunteerClick} className="px-6 py-3 rounded-full border border-white hover:bg-white hover:text-purple-700 transition">
                 Volunteer
               </button>
-              </NavLink>
+           
             </div>
           </motion.div>
         </div>

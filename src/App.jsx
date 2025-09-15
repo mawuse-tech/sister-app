@@ -37,37 +37,21 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <PublicRoute>
-            <Hero />
-            </PublicRoute>
-        )
+        element: <Hero />
 
       },
       {
         path: "about",
-        element: (
-          <PublicRoute>
-            <AboutUs />
-          </PublicRoute>
-        )
+        element: <AboutUs />
 
       },
       {
         path: "contact",
-        element: (
-          <PublicRoute>
-             <ContactUs />
-          </PublicRoute>
-        )
+        element: <ContactUs />
       },
       {
         path: "services",
-        element: (
-          <PublicRoute>
-            <Services />
-          </PublicRoute>
-        )
+        element: <Services />
       },
       {
         path: "login",
@@ -79,11 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: "volunteer",
-        element: (
-          <PublicRoute>
-            <SignupSister />
-          </PublicRoute>
-        )
+        element: <SignupSister />  
       },
       {
         path: "signup",
@@ -111,15 +91,16 @@ const router = createBrowserRouter([
       },
       {
         path: "chatbox",
-        element: <ChatLayout />,
+        element: (
+          <PrivateRoute>
+            <ChatLayout />,
+          </PrivateRoute>
+        ),
         children: [
           {
             index: true,
-            element: (
-              <PrivateRoute>
-                <ViewAllChat />
-              </PrivateRoute>
-            )
+            element: <ViewAllChat />
+            
           }
         ]
       },
