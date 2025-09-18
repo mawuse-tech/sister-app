@@ -11,6 +11,6 @@ export const store = configureStore({
         login: loginReducer,
         logout: logoutReducer,
         isUserLoggedIn: isUserLoggedIn,
-        volunteer: volunteer
+        volunteerDetails: volunteer
     }
 })

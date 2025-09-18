@@ -63,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "volunteer",
-        element: <SignupSister />  
+        element: (
+          <PrivateRoute>
+            <SignupSister />
+          </PrivateRoute>
+        )
       },
       {
         path: "signup",
@@ -100,7 +104,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <ViewAllChat />
-            
+
           }
         ]
       },
