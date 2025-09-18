@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { isUserLoggedIn, logout } from "../redux-store/features/users/userThunks";
 import toast from "react-hot-toast";
+import { span } from "framer-motion/m";
+import { FiGrid, FiUser } from "react-icons/fi";
 
 
 const Navbar = () => {
 
   const { loading, error } = useSelector((store) => store.logout);
   const { user } = useSelector((store) => store.isUserLoggedIn);
+
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -17,7 +20,6 @@ const Navbar = () => {
     try {
 
       const userLogout = await dispatch(logout()).unwrap();
-      console.log("--------", userLogout);
 
       if (userLogout.success === true) {
         toast.success(userLogout.message);
@@ -29,8 +31,10 @@ const Navbar = () => {
       console.log(error);
       toast.error(error.message);
     }
-  }
+  };
 
+  const capitalize = (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
 
   return (
     <div className="navbar bg-white shadow-sm">
@@ -98,10 +102,23 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4">
 
+            {user?.isVolunteer === true && (
+              <NavLink to="/sisdash" className="flex items-center gap-2 text-[#BA68C8] font-medium hover:text-purple-900 transition">
+                <FiGrid className="text-lg" />
+                <span className="text-gray-600">My Dashboard</span>
+              </NavLink>
+            )}
+
             <NavLink to="/userdash">
-              <span className="w-8 h-8 flex items-center justify-center rounded-full bg-[#BA68C8] text-white  font-bold cursor-pointer">
-                {user.firstName.charAt(0).toUpperCase()}
-              </span>
+              <div className="flex items-center gap-2">
+                {/* User Icon */}
+                <FiUser className="text-[#BA68C8] text-2xl" />
+
+                {/* Full Name */}
+                <span className="text-sm text-gray-600 font-medium">
+                  {capitalize(user.firstName)} {capitalize(user.lastName)}
+                </span>
+              </div>
             </NavLink>
 
             <button

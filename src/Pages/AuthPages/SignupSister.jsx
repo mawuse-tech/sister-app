@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import signup from '../../assets/images/sign3.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { volunteer } from '../../redux-store/features/users/userThunks';
+import { isUserLoggedIn, volunteer } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
 
 const SignupSister = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { error, loading } = useSelector((store) => store.volunteer)
+  const { error, loading, volunteerState } = useSelector((store) => store.volunteerDetails)
 
   const [profilePic, setProfilePic] = useState(null)
   const [lincense, setLincense] = useState([])
@@ -35,6 +35,8 @@ const SignupSister = () => {
     try {
       const response = await dispatch(volunteer(formData)).unwrap()
       console.log('...........', response.message)
+
+      dispatch(isUserLoggedIn())
 
       if (response.success === true) {
         toast.success(response.message)
@@ -100,6 +102,8 @@ const SignupSister = () => {
                   <label className="text-sm mb-1" htmlFor="about">Your Bio</label>
                   <textarea
                     name='bio'
+                    minLength={50}     // minimum 50 characters
+                    maxLength={200}
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     className="textarea textarea-bordered border border-gray-500 w-full text-gray-700 bg-white"

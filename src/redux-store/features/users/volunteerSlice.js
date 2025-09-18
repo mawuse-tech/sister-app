@@ -4,7 +4,7 @@ import { volunteer } from "./userThunks";
 const volunteerSlice = createSlice({
     name: "volunteer",
     initialState: {
-        user: null,
+        volunteerState: null,
         loading: false,
         error: null
     },
@@ -17,7 +17,7 @@ const volunteerSlice = createSlice({
             })
             .addCase(volunteer.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload; // store updated user
+                state.volunteerState = action.payload.volunteer; // store updated user 
             })
             .addCase(volunteer.rejected, (state, action) => {
                 state.loading = false;

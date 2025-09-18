@@ -30,13 +30,14 @@ const EditProfilePage = () => {
             </div>
 
             <div className='flex gap-2'>
+              
               <div>
-                <label className="text-sm mb-1" htmlFor="password">Password</label>
+                <label className="text-sm mb-1" htmlFor="email">LinkedIn Link</label>
                 <input
-                  id="password"
-                  type="password"
-                  placeholder="Enter password"
-                  className="input border-1 border-gray-500 w-full text-black bg-white"
+                  id="social"
+                  type="text"
+                  className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
+                  placeholder='optional'
                 />
               </div>
 
@@ -77,15 +78,6 @@ const EditProfilePage = () => {
                 />
               </div>
 
-              <div>
-                <label className="text-sm mb-1" htmlFor="email">LinkedIn Link</label>
-                <input
-                  id="social"
-                  type="text"
-                  className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
-                  placeholder='optional'
-                />
-              </div>
             </div>
 
             <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>

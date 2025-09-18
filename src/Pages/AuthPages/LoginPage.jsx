@@ -24,6 +24,7 @@ const LoginPage = () => {
 
       if (response.success === true) {
         toast.success("Login successful!");
+        
         dispatch(isUserLoggedIn())
           navigate('/userdash')
       };
