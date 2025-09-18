@@ -7,19 +7,22 @@ import { FiMessageCircle, FiUsers, FiHeart } from "react-icons/fi";
 const UserDashboard = () => {
   const { user } = useSelector((store) => store.isUserLoggedIn);
 
+  const capitalize = (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
+
+
   return (
     <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700">
       <div className="bg-white w-full max-w-6xl rounded-xl shadow-md p-8 space-y-8">
 
         <div className="text-center">
           <h2 className="text-3xl font-semibold">
-            Welcome, <span className="text-[#BA68C8]">{user?.firstName}</span>
+            Welcome, <span className="text-[#BA68C8]">{capitalize(user?.firstName)}</span>
           </h2>
           <p className="text-gray-600 mt-2">
             We’re glad to have you back. Here’s what’s happening:
           </p>
         </div>
-
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Recent Chats */}

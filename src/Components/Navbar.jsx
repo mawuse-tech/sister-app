@@ -23,6 +23,7 @@ const Navbar = () => {
 
       if (userLogout.success === true) {
         toast.success(userLogout.message);
+        
         dispatch(isUserLoggedIn())
         navigate("/");
       }
@@ -103,14 +104,14 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
 
             {user?.isVolunteer === true && (
-              <NavLink to="/sisdash" className="flex items-center gap-2 text-[#BA68C8] font-medium hover:text-purple-900 transition">
+              <NavLink to="/sisdash" className="flex items-center gap-1 text-[#BA68C8] font-medium hover:text-purple-900 transition">
                 <FiGrid className="text-lg" />
                 <span className="text-gray-600">My Dashboard</span>
               </NavLink>
             )}
 
             <NavLink to="/userdash">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {/* User Icon */}
                 <FiUser className="text-[#BA68C8] text-2xl" />
 
