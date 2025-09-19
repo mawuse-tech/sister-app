@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 export const PrivateRoute = ({ children }) => {
     const { loading, user } = useSelector((store) => store.isUserLoggedIn)
 
-    console.log('isUserLoggedIn data:', user)
+    // console.log('isUserLoggedIn data:', user)
     if (loading) return <div>loading ...</div>
 
     return user ? children : <Navigate to={'/'} replace />

@@ -1,9 +1,33 @@
+import toast from 'react-hot-toast'
 import React, { Children } from 'react'
 import { MdCheckCircle, MdDashboard, MdEdit, MdHistory, MdLogout, MdMessage, MdSettings } from 'react-icons/md'
-import { NavLink, Outlet } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { isUserLoggedIn, quitVolunteering } from '../redux-store/features/users/userThunks'
 
 
 const DashboardStructure = ({ title, }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+async function handleQuitVolunteer() {
+    try {
+
+      const quitUser = await dispatch(quitVolunteering()).unwrap();
+
+      if (quitUser.success === true) {
+        toast.success(quitUser.message);
+        navigate('/userdash')
+        
+        dispatch(isUserLoggedIn())
+      }
+
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       <div className="bg-[#f7f0f8] min-h-screen ">
@@ -107,7 +131,7 @@ const DashboardStructure = ({ title, }) => {
 
                 <div className='flex items-center gap-2'>
                   <MdLogout className='text-[1.8rem]' />
-                  <span className='text-[1.2rem]'>Logout</span>
+                   <button onClick={handleQuitVolunteer} className='text-[1.2rem]'>Quit Volunteering</button>
                 </div>
               </ul>
             </div>

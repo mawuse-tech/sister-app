@@ -86,7 +86,7 @@ const SignupSister = () => {
                   </div>
 
                   <div>
-                    <label className="text-sm mb-1" htmlFor="password">Proffession</label>
+                    <label className="text-sm mb-1" htmlFor="password">Profession</label>
                     <input
                       type="text"
                       name='proffession'
@@ -103,7 +103,6 @@ const SignupSister = () => {
                   <textarea
                     name='bio'
                     minLength={50}     // minimum 50 characters
-                    maxLength={200}
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     className="textarea textarea-bordered border border-gray-500 w-full text-gray-700 bg-white"
@@ -142,8 +141,16 @@ const SignupSister = () => {
                   </div>
                 </div>
 
-                <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
-                  <button className='cursor-pointer'>Submit</button>
+               <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
+                      }`}
+                  >
+                    Submit
+                  </button>
+
                 </div>
               </form>
             </div>
