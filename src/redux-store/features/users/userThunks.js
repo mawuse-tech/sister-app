@@ -69,4 +69,31 @@ export const volunteer = createAsyncThunk('volunteer', async(formData, {rejectWi
     } catch (err) {
         return rejectWithValue(err.response?.data || err.message);
     }
-})
+});
+
+//quit volunteering
+export const quitVolunteering = createAsyncThunk("/auth/quit", 
+    async(_, thunkApi) => {
+       try {
+         const res = await api.post('/auth/quit');
+        return res.data
+       } catch (error) {
+        return rejectWithValue(error.response?.data?.message || "Logout failed, please try again")
+       }
+    }
+);
+
+
+//update thunk
+// export const updateProfile = createAsyncThunk('updateProfile', async(formData, {rejectWithValue}) =>{
+//     try {
+//         const response = await api.post('/auth/updateProfile', formData, {
+//             headers:  { "Content-Type": "multipart/form-data" }
+//         })
+//         console.log('updated profile data', response.data)
+//         return response.data
+
+//     } catch (err) {
+//         return rejectWithValue(err.response?.data || err.message);
+//     }
+// });
