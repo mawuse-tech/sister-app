@@ -3,59 +3,79 @@ import DashboardStructure from '../../LayoutPage/DashboardStructure'
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../config/axios';
 import toast from 'react-hot-toast';
-import { isUserLoggedIn } from '../../redux-store/features/users/userThunks';
 import { useNavigate } from 'react-router-dom';
+import { updatedVolunteerData } from '../../redux-store/features/users/userLoggedInSlice';
 
 const EditProfilePage = () => {
   const user = useSelector((state) => state.isUserLoggedIn);
-  //  console.log('-----------', user)
+  // console.log('-----------', user)
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    bio: "",
-    proffession: "",
-    linkedInLink: ""
-  });
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [profilePic, setProfilePic] = useState(null)
+  const [lincense, setLincense] = useState([])
+  const [preview, setPreview] = useState(null)
+  const [linkedInLink, setLinkedInLink] = useState('')
+  const [proffession, setProffession] = useState('')
+  const [bio, setBio] = useState('')
 
   useEffect(() => {
     if (user) {
-      setFormData({
-        firstName: user.user.firstName || "",
-        lastName: user.user.lastName || "",
-        email: user.user.email || "",
-        bio: user.user.bio || "",
-        proffession: user.user.proffession || "",
-        linkedInLink: user.user.linkedInLink || ""
-      });
+      setFirstName(user.user.firstName || "");
+      setLastName(user.user.lastName || "");
+      setEmail(user.user.email || "");
+      setBio(user.user.bio || "");
+      setProffession(user.user.proffession || "");
+      setLinkedInLink(user.user.linkedInLink || "");
+      setLincense(user.user.lincense || []);
+      setProfilePic(user.user.profilePic || null);
     }
   }, [user]);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
+
+    const formData = new FormData()
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email)
+    formData.append("linkedInLink", linkedInLink);
+    formData.append("proffession", proffession);
+    formData.append("bio", bio);
+
+    lincense.forEach((file) => {
+      formData.append("lincense", file);
+    });
+
+    formData.append("profilePic", profilePic);
 
     try {
       const response = await api.post('/auth/updateProfile', formData)
-      console.log('.............', response.data)
+       console.log('.............', response.data)
 
       if (response.data) {
-        console.log(response.data)
+        // console.log(response.data)
         toast.success(response.data.message)
 
-        dispatch(isUserLoggedIn())
+        dispatch(updatedVolunteerData(response.data.user))
+
         navigate('/sisdash')
         return response.data
       }
-      
+
 
     } catch (error) {
       console.log(error)
-     toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }finally{
+      setLoading(false)
     }
-
 
   };
 
@@ -70,19 +90,19 @@ const EditProfilePage = () => {
             <div className='flex gap-2'>
               <div> <label className="text-sm mb-1" htmlFor="email">First Name</label>
                 <input
-                  id="firstName"
+                  name="firstName"
                   type="text"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 /></div>
 
               <div> <label className="text-sm mb-1" htmlFor="email">Last Name</label>
                 <input
-                  id="lastName"
+                  name="lastName"
                   type="text"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 /></div>
             </div>
@@ -92,10 +112,10 @@ const EditProfilePage = () => {
               <div>
                 <label className="text-sm mb-1" htmlFor="email">Email address</label>
                 <input
-                  id="email"
+                  name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 />
               </div>
@@ -103,9 +123,10 @@ const EditProfilePage = () => {
               <div>
                 <label className="text-sm mb-1" htmlFor="password">Profession</label>
                 <input
+                  name="proffession"
                   type="text"
-                  value={formData.proffession}
-                  onChange={(e) => setFormData({ ...formData, proffession: e.target.value })}
+                  value={proffession}
+                  onChange={(e) => setProffession(e.target.value)}
                   className="input border-1 border-gray-500 w-full text-black bg-white"
                 />
               </div>
@@ -114,27 +135,40 @@ const EditProfilePage = () => {
             <div className='mt-2'>
               <label className="text-sm mb-1" htmlFor="about">Your Bio</label>
               <textarea
-                id="about"
+                name="bio"
                 className="textarea textarea-bordered border border-gray-500 w-full text-black bg-white"
                 rows="4"
-                value={formData.bio}
-                onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
               ></textarea>
             </div>
 
             <div className='flex gap-2 mt-2'>
               <div> <label className="text-sm mb-1" htmlFor="email">Upload your Image</label>
                 <input
-                  id="file"
                   type="file"
+                  name='profilePic'
+                  accept="image/*"
+                  onChange={(e) => {
+                    const selectedFile = e.target.files[0]
+                    // console.log('-----', selectedFile)
+                    setProfilePic(selectedFile)
+                    // setPreview(URL.createObjectURL(selectedFile))
+                  }}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 /></div>
 
               <div>
-                <label className="text-sm mb-1" htmlFor="email">Upload your Lincence</label>
+                <label className="text-sm mb-1" htmlFor="email">Upload your Licence</label>
                 <input
-                  id="file"
                   type="file"
+                  name='lincense'
+                  accept=".pdf,.doc,.docx"
+                  multiple
+                  onChange={(e) => {
+                    const newFiles = Array.from(e.target.files); // newly selected files
+                    setLincense(prev => [...prev, ...newFiles]);  // merge with previous files
+                  }}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 />
               </div>
@@ -142,10 +176,10 @@ const EditProfilePage = () => {
               <div>
                 <label className="text-sm mb-1" htmlFor="email">LinkedIn Link</label>
                 <input
-                  id="linkedInLink"
+                  name="linkedInLink"
                   type="text"
-                  value={formData.linkedInLink}
-                  onChange={(e) => setFormData({ ...formData, linkedInLink: e.target.value })}
+                  value={linkedInLink}
+                  onChange={(e) => setLinkedInLink(e.target.value)}
                   className="input border-1 border-gray-500 w-full mb-4 text-black bg-white"
                 />
               </div>
@@ -153,7 +187,14 @@ const EditProfilePage = () => {
             </div>
 
             <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
-              <button className='cursor-pointer'>Click to Edit</button>
+             <button
+                    type="submit"
+                    disabled={loading}
+                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
+                      }`}
+                  >
+                    Click to update
+                  </button>
             </div>
           </form>
         </div>

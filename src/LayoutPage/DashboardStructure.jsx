@@ -1,25 +1,27 @@
 import toast from 'react-hot-toast'
 import React, { Children } from 'react'
 import { MdCheckCircle, MdDashboard, MdEdit, MdHistory, MdLogout, MdMessage, MdSettings } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { isUserLoggedIn, quitVolunteering } from '../redux-store/features/users/userThunks'
+import { updatedVolunteerData } from '../redux-store/features/users/userLoggedInSlice'
 
 
 const DashboardStructure = ({ title, }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+    const { error, loading } = useSelector((store) => store.quitVolunteer)
 
 async function handleQuitVolunteer() {
     try {
 
-      const quitUser = await dispatch(quitVolunteering()).unwrap();
-
-      if (quitUser.success === true) {
-        toast.success(quitUser.message);
+      const response = await dispatch(quitVolunteering()).unwrap();
+    
+      if (response.success === true) {
+        toast.success(response.message);
         navigate('/userdash')
         
-        dispatch(isUserLoggedIn())
+        dispatch(updatedVolunteerData(response.quitVolunteer))
       }
 
     } catch (error) {
@@ -38,7 +40,7 @@ async function handleQuitVolunteer() {
 
             {/* Page content */}
             <div className="drawer-content overflow-y-auto max-h-screen p-6">
-              <label htmlFor="my-drawer" className="btn btn-primary drawer-button lg:hidden mb-4">
+              <label htmlFor="my-drawer" className="btn btn-primary drawer-button lg:hidden mb-4 bg-[#a64db3] border-0">
                 Open drawer
               </label>
 
@@ -131,7 +133,12 @@ async function handleQuitVolunteer() {
 
                 <div className='flex items-center gap-2'>
                   <MdLogout className='text-[1.8rem]' />
-                   <button onClick={handleQuitVolunteer} className='text-[1.2rem]'>Quit Volunteering</button>
+                   <button 
+                   disabled={loading}
+                    onClick={handleQuitVolunteer} 
+                   className={` flex justify-center items-center text-[1.2rem] ${loading ? "cursor-not-allowed" : "cursor-pointer "
+                      }`}
+                  >Quit Volunteering</button>
                 </div>
               </ul>
             </div>

@@ -5,6 +5,7 @@ import logoutReducer from './features/users/logoutSlice'
 import isUserLoggedIn from './features/users/userLoggedInSlice'
 import volunteer from './features/users/volunteerSlice'
 import quitVolunteerReducer from './features/users/quitVolunteeringSlice'
+import allVolunteers from './features/users/allVolunteerSlice'
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         logout: logoutReducer,
         isUserLoggedIn: isUserLoggedIn,
         volunteerDetails: volunteer,
-        quitVolunteer: quitVolunteerReducer 
+        quitVolunteer: quitVolunteerReducer,
+        volunteers: allVolunteers 
     }
 })

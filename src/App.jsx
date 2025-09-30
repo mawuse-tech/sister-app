@@ -155,7 +155,7 @@ const router = createBrowserRouter([
             element: <ViewAllSisters />
           },
           {
-            path: "profile",
+            path: ":id",
             element: <SisterProfile />
           }
         ]

@@ -9,6 +9,12 @@ export const isUserLoggedInSlice = createSlice({
         error: null
     },
 
+    reducers: {
+        updatedVolunteerData: (state, action) => {
+            state.user = {...state.user, ...action.payload}
+        }
+    },
+
     extraReducers: (builder) => {
         builder
             .addCase(isUserLoggedIn.pending, (state) => {
@@ -27,4 +33,5 @@ export const isUserLoggedInSlice = createSlice({
     }
 })
 
+export const {updatedVolunteerData} = isUserLoggedInSlice.actions
 export default isUserLoggedInSlice.reducer
