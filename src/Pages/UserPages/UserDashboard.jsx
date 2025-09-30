@@ -13,7 +13,7 @@ const UserDashboard = () => {
 
   return (
     <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700">
-      <div className="bg-white w-full max-w-6xl rounded-xl shadow-md p-8 space-y-8">
+      <div className="bg-white w-full max-w-6xl rounded-xl shadow-md lg:p-8 md:p-8 p-3 space-y-8">
 
         <div className="text-center">
           <h2 className="text-3xl font-semibold">
@@ -26,7 +26,7 @@ const UserDashboard = () => {
 
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Recent Chats */}
-          <div className="bg-[#f1d7f5] rounded-xl p-6 shadow-sm">
+          <div className="bg-[#f1d7f5] rounded-xl lg:p-6 md:p-6 p-1 shadow-sm">
             <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
               <FiMessageCircle className="text-[#BA68C8]" /> Recent Chats
             </h3>
@@ -98,7 +98,7 @@ const UserDashboard = () => {
           </div>
 
 
-          <div className="bg-[#BA68C8] rounded-xl p-6 text-white shadow-sm">
+          <div className="bg-[#BA68C8] rounded-xl lg:p-6 md:p-6 px-2 py-4 text-white shadow-sm">
             <h3 className="text-xl font-medium mb-4 flex items-center gap-2">
               <FiUsers /> Sisters Directory
             </h3>
@@ -112,7 +112,7 @@ const UserDashboard = () => {
                   </div>
                 </div>
                 <div>
-                  <p className="font-semibold">Nkunim Asaa Osei</p>
+                  <p className="font-semibold">Nkunim Asaa</p>
                   <p className="text-sm">Psychologist</p>
                 </div>
               </div>

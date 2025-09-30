@@ -116,6 +116,7 @@ const SignupSister = () => {
                     <input
                       type="file"
                       name='profilePic'
+                      accept="image/*"
                       onChange={(e) => {
                         const selectedFile = e.target.files[0]
                         // console.log('-----', selectedFile)
@@ -131,6 +132,7 @@ const SignupSister = () => {
                       id="file"
                       type="file"
                       name='lincense'
+                      accept=".pdf,.doc,.docx"
                       multiple
                       onChange={(e) => {
                         const newFiles = Array.from(e.target.files); // newly selected files
@@ -141,7 +143,7 @@ const SignupSister = () => {
                   </div>
                 </div>
 
-               <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+                <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
                   <button
                     type="submit"
                     disabled={loading}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiChevronDown, FiSearch } from 'react-icons/fi'
 
 import teacher from "../../assets/images/teacher.jpg"
@@ -7,6 +7,8 @@ import onek from "../../assets/images/onek.png"
 import wo from "../../assets/images/1wo.png"
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllVolunteers } from '../../redux-store/features/users/userThunks'
 
 export const sisterData = [
   {
@@ -82,14 +84,26 @@ export const sisterData = [
 ]
 
 const ViewAllSisters = () => {
-  const sistersPerPage = 4;
-  const [currentPage, setCurrentPage] = useState(1);
+  // const sistersPerPage = 4;
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  const indexOfLastSister = sistersPerPage * currentPage;
-  const indexOfFirstSister = indexOfLastSister - sistersPerPage;
+  // const indexOfLastSister = sistersPerPage * currentPage;
+  // const indexOfFirstSister = indexOfLastSister - sistersPerPage;
 
-  const currentSisters = sisterData.slice(indexOfFirstSister, indexOfLastSister);
+  // const currentSisters = sisterData.slice(indexOfFirstSister, indexOfLastSister);
 
+  const dispatch = useDispatch()
+  const { error, loading, volunteers } = useSelector((store) => store.volunteers)
+
+  useEffect(() => {
+    dispatch(fetchAllVolunteers())
+  }, [dispatch]);
+
+  if (loading) return <p>Loading volunteers...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
+  const capitalize = (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
 
 
   return (
@@ -156,20 +170,23 @@ const ViewAllSisters = () => {
 
 
       {/* Body Section */}
-      <div className="bg-[#f7f0f8]  h-full pt-6 px-4 text-gray-700">
-        <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {currentSisters.map((sister) => (
+      <div className="bg-[#f7f0f8]  h-full pt-6 px-2 lg:px-4 md:px-4 text-gray-700">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4 md:gap-4 gap-2">
+          {volunteers.map((volunteer) => (
             <div
-              key={sister.id}
+              key={volunteer._id}
               className="bg-[#BA68C8] rounded shadow-md flex flex-col gap-1 items-center justify-center"
             >
               <img
-                src={sister.image}
-                alt={sister.name}
-                className="w-full h-60 object-cover rounded-t"
+                src={`http://localhost:8000/${volunteer?.profilePic}`}
+                alt={volunteer?.name}
+                className="w-full lg:h-60 md:h-60 h-36 object-cover rounded-t"
               />
-              <p className="text-center font-semibold text-lg text-white">{sister.name}</p>
-              <p className="text-center font-medium text-sm text-white mb-2">{sister.proffession}</p>
+              <p className="text-center font-semibold text-lg text-white">
+                {`${capitalize(volunteer?.firstName)} ${capitalize(volunteer?.lastName)}`}
+              </p>
+
+              <p className="text-center font-medium text-sm text-white mb-2">{capitalize(volunteer?.proffession)}</p>
 
               <div className="flex justify-center gap-4 mb-3">
                 <NavLink to="/chat">
@@ -178,17 +195,22 @@ const ViewAllSisters = () => {
                   </span>
                 </NavLink>
 
-               <NavLink to="/allsisters/profile">
-                 <span className="text-white border shadow-2xl hover:text-white transitio rounded px-3 py-1 text-sm font-semibold cursor-pointer">
-                  View Profile
-                </span>
-               </NavLink>
+                <NavLink to={`/allsisters/${volunteer._id}`}>
+                  <span className="text-white border shadow-2xl hover:text-white transitio rounded px-3 py-1 text-sm font-semibold cursor-pointer">
+                    View Profile
+                  </span>
+                </NavLink>
 
               </div>
 
-              <span className="block text-center mt-2 font-semibold text-sm bg-[#F3F3FC] text-gray-700 px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2">
-                {sister.available}
+              <span
+                className={`block text-center mt-2 font-semibold text-sm px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2 ${volunteer.isAvailable ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                  }`}
+              >
+                {volunteer.isAvailable ? "Available" : "Unavailable"}
               </span>
+
+
 
             </div>
           ))}
@@ -196,7 +218,7 @@ const ViewAllSisters = () => {
 
         <div className="flex justify-around mt-3">
 
-          <button
+          {/* <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             className={`join-item btn btn-outline text-[white] !bg-[#BA68C8] px-6 border-none ${currentPage === 1 ? 'opacity-40 cursor-not-allowed' : ''
               }`}
@@ -204,9 +226,9 @@ const ViewAllSisters = () => {
           >
             <FaArrowLeft />
             Previous page
-          </button>
+          </button> */}
 
-          <button
+          {/* <button
             onClick={() =>
               setCurrentPage((prev) =>
                 indexOfLastSister < sisterData.length ? prev + 1 : prev
@@ -218,7 +240,7 @@ const ViewAllSisters = () => {
           >
             Next
             <FaArrowRight />
-          </button>
+          </button> */}
 
         </div>
       </div>

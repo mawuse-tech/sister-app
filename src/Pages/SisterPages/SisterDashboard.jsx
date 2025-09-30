@@ -8,9 +8,9 @@ import { isUserLoggedIn} from '../../redux-store/features/users/userThunks';
 
 const SisterDashboard = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  const { error, loading, user } = useSelector((store) => store.isUserLoggedIn)
+  const {user } = useSelector((store) => store.isUserLoggedIn)
 
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
