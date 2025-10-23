@@ -33,7 +33,7 @@ const AvailabilityPage = () => {
     }
 
     try {
-      const response = await api.post("/auth/available", { day, startTime, endTime });
+      const response = await api.post("/available", { day, startTime, endTime });
       console.log('---------', response.data.availability)
 
       toast.success("Availability saved!");
@@ -55,7 +55,7 @@ const AvailabilityPage = () => {
   const handleDeleteSlot = async (slotId) => {
 
     try {
-      const response = await api.delete(`/auth/deleteSlot/${slotId}`);
+      const response = await api.delete(`/deleteSlot/${slotId}`);
       toast.success("Slot deleted!");
       // console.log(response.data.availability)
 

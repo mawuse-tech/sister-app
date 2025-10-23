@@ -89,7 +89,7 @@ const UserDashboard = () => {
             
 
             <div className="text-center mt-3">
-              <NavLink to="/chat">
+              <NavLink to="/chatbox">
                 <span className="text-[#BA68C8] underline italic">
                   View all chats...
                 </span>

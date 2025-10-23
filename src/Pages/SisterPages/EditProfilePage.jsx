@@ -56,8 +56,8 @@ const EditProfilePage = () => {
     formData.append("profilePic", profilePic);
 
     try {
-      const response = await api.post('/auth/updateProfile', formData)
-       console.log('.............', response.data)
+      const response = await api.post('/updateProfile', formData)
+        // console.log('.............', response.data)
 
       if (response.data) {
         // console.log(response.data)
