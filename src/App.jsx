@@ -97,14 +97,17 @@ const router = createBrowserRouter([
         path: "chatbox",
         element: (
           <PrivateRoute>
-            <ChatLayout />,
+            <ChatLayout />
           </PrivateRoute>
         ),
         children: [
           {
-            index: true,
+            index: true, 
             element: <ViewAllChat />
-
+          },
+          {
+            path: ":id", 
+            element: <ViewAllChat />
           }
         ]
       },
@@ -160,14 +163,14 @@ const router = createBrowserRouter([
           }
         ]
       },
-      {
-        path: "chat",
-        element: (
-          <PrivateRoute>
-            <ViewAllChat />
-          </PrivateRoute>
-        )
-      }
+      // {
+      //   path: "chat",
+      //   element: (
+      //     <PrivateRoute>
+      //       <ViewAllChat />
+      //     </PrivateRoute>
+      //   )
+      // }
     ]
   }
 ])

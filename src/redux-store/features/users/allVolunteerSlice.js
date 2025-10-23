@@ -9,15 +9,20 @@ export const allVolunteersSlice = createSlice({
         error: null
     },
 
+    reducers:{
+        updatedVolunteer: (state, action) => {
+           state.volunteers = {...state.volunteers, ...action.payload} 
+        }
+    },
+
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllVolunteers.pending, (state) => {
                 state.loading = true
             })
             .addCase(fetchAllVolunteers.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.loading = false,
-                    state.volunteers = action.payload
+                    state.volunteers = action.payload.volunteers
             })
             .addCase(fetchAllVolunteers.rejected, (state, action) => {
                 state.loading = false,

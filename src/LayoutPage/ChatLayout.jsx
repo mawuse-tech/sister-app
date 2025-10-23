@@ -1,12 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiMail, FiMap, FiPhone, FiSearch, FiSend, FiVideo } from 'react-icons/fi'
-import { MdCheckCircle, MdDashboard, MdEdit, MdHistory, MdLogout, MdMessage, MdSettings } from 'react-icons/md'
-import { Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import lawyer from '../assets/images/testi.png';
-import onek from '../assets/images/onek.png';
-import { sisterData } from '../Pages/UserPages/ViewAllSisters';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllVolunteers, fourPerPage } from '../redux-store/features/users/userThunks';
 
 const ChatLayout = () => {
+    const { volunteers } = useSelector((store) => store.volunteers)
+    // console.log(volunteers)
+    const dispatch = useDispatch()
+    const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (search.trim()) {
+                    // If user is searching, call the filtered endpoint
+                    await dispatch(fourPerPage(search)).unwrap();
+                } else {
+                    // If search is empty, load all volunteers
+                    await dispatch(fetchAllVolunteers()).unwrap();
+                }
+            } catch (error) {
+                console.error("Error fetching volunteers:", error);
+            }
+        };
+
+        fetchData();
+    }, [dispatch, search]);
+
+    const capitalize = (str) =>
+        str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
+
     return (
         <>
             <div className="bg-[#f7f0f8] min-h-screen">
@@ -31,7 +56,8 @@ const ChatLayout = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <p>Halle</p>
+                                        <p>{volunteers[0] ? capitalize(volunteers[0].firstName) : 'Select a sister'}</p>
+
                                         <p>Online</p>
                                     </div>
                                 </div>
@@ -82,30 +108,42 @@ const ChatLayout = () => {
                                         type="text"
                                         placeholder="Search or start a new chat"
                                         className="p-3 pl-10 rounded bg-white text-black shadow-md outline-none w-full"
+                                        value={search}
+                                        onChange={(e) => setSearch(e.target.value)}
                                     />
+
                                 </div>
 
                                 <div className='flex flex-col gap-6'>
-                                    {sisterData.map((sister) => (
-                                        <div className='flex items-center gap-2'>
-                                            <div className="avatar">
-                                                <div className="w-12 rounded-full ring-white ring-offset-white ring-2">
-                                                    <img src={sister.image} alt="Sister Avatar" />
+                                    {volunteers?.map((volunteer) => (
+                                        <NavLink key={volunteer._id} to={`/chatbox/${volunteer._id}`}
+                                            className={({ isActive }) =>
+                                                `p-1 rounded flex items-center gap-2 ${isActive ? "bg-white text-black" : "text-white"}`
+                                            }
+                                        >
+                                            <div className='flex items-center gap-2'>
+                                                <div className="avatar">
+                                                    <div className="w-12 rounded-full ring-white ring-offset-white ring-2">
+                                                        <img
+                                                            src={`http://localhost:8000/${volunteer?.profilePic}`}
+                                                            alt="Sister Avatar"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p className='text-[1rem]'>
+                                                        {capitalize(volunteer.firstName)} {capitalize(volunteer.lastName)}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p className='text-[1rem]'>{sister.name}</p>
-                                                <p>{sister.message}</p>
-                                            </div>
-                                        </div>
+                                        </NavLink>
                                     ))}
-
                                 </div>
 
-                                <div className='flex items-center gap-2'>
+                                {/* <div className='flex items-center gap-2'>
                                     <MdLogout className='text-[1.8rem]' />
                                     <span className='text-[1.2rem]'>Logout</span>
-                                </div>
+                                </div> */}
                             </ul>
                         </div>
                     </div>

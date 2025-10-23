@@ -17,12 +17,12 @@ const SisterDashboard = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      <h3 className='text-2xl py-4 font-medium text-gray-700'>Welcome {capitalize(user?.firstName)}</h3>
+      <h3 className='text-2xl py-4 px-4 font-medium text-gray-700'>Welcome {capitalize(user?.firstName)}</h3>
 
       <div className="flex gap-10 bg-white w-full lg:w-[38rem] rounded-2xl p-4 items-center shadow-lg">
 
         <div className="avatar">
-          <div className="w-36 rounded-full ring-[#BA68C8] ring-offset-[#5651AB] ring-1">
+          <div className="w-24 md:w-32 lg:w-36 rounded-full ring-[#BA68C8] ring-offset-[#5651AB] ring-1">
             <img src={`http://localhost:8000/${user.profilePic}`} alt="Sister Avatar" />
           </div>
         </div>

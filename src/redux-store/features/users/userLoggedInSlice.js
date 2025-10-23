@@ -11,7 +11,8 @@ export const isUserLoggedInSlice = createSlice({
 
     reducers: {
         updatedVolunteerData: (state, action) => {
-            state.user = {...state.user, ...action.payload}
+            //Keep all the old user data, but update or add any new fields from the payload.
+            state.user = { ...state.user, ...action.payload }
         }
     },
 
@@ -33,5 +34,5 @@ export const isUserLoggedInSlice = createSlice({
     }
 })
 
-export const {updatedVolunteerData} = isUserLoggedInSlice.actions
+export const { updatedVolunteerData } = isUserLoggedInSlice.actions
 export default isUserLoggedInSlice.reducer

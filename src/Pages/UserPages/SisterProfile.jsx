@@ -12,7 +12,7 @@ const SisterProfile = () => {
   useEffect(() => {
     const fetchVolunreerData = async () => {
       try {
-        const response = await api.get(`/auth/volunteer/${id}`)
+        const response = await api.get(`/volunteer/${id}`)
         // console.log('------------',response.data)
         setVolunteer(response.data.volunteerProfile)
       } catch (error) {
