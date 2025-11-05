@@ -7,6 +7,9 @@ import volunteer from './features/users/volunteerSlice'
 import quitVolunteerReducer from './features/users/quitVolunteeringSlice'
 import allVolunteers from './features/users/allVolunteerSlice'
 import fourVolunteerPerPage from './features/users/volunteerPerPageSlice'
+import chatReducer from './features/users/chatSlice'
+import chatPartnersReducer from './features/users/chatPartnersSlice'
+import recentChatReducer from './features/users/recentChatSlice'
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +20,9 @@ export const store = configureStore({
         volunteerDetails: volunteer,
         quitVolunteer: quitVolunteerReducer,
         volunteers: allVolunteers,
-        volunteerPerPage: fourVolunteerPerPage
+        volunteerPerPage: fourVolunteerPerPage,
+        chat: chatReducer,
+        chatPartnersData: chatPartnersReducer,
+        recentChatData: recentChatReducer
     }
 })
