@@ -1,52 +1,134 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getSocket, initSocket } from "../../config/socket";
+import api from "../../config/axios";
+import { addMessage, setMessagesForReceiver } from "../../redux-store/features/users/chatSlice";
 
 const ViewAllChat = () => {
-  return (
-    <>
-      <div className='lg:w-2xl'>
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary">What kind of nonsense is this</div>
-        </div>
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary">
-            Put me on the Council and not make me a Master!??
-          </div>
-        </div>
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary">
-            That's never been done in the history of the Jedi.
-          </div>
-        </div>
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary">It's insulting!</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">Calm down, Anakin.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">You have been given a great honor.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">To be on the Council at your age.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">It's never happened before.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">It's never happened before.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">It's never happened before.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">It's never happened before.</div>
-        </div>
-        <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary">It's never happened before.</div>
-        </div>
-      </div>
-    </>
-  )
-}
+  const { id: receiverId } = useParams();
+  const dispatch = useDispatch();
 
-export default ViewAllChat
+  const { user } = useSelector((store) => store.isUserLoggedIn)
+  //console.log(user)
+
+  const senderId = user?._id;
+
+  const allMessages = useSelector((store) => store.chat.messages);
+  const messages = allMessages[receiverId] || [];
+  const [newMessage, setNewMessage] = useState("");
+  const socketRef = useRef(null);
+  const scrollRef = useRef(null);
+
+  // Fetch message history
+  useEffect(() => {
+    if (!senderId || !receiverId) return;
+
+    const fetchHistory = async () => {
+      try {
+        const res = await api.get(`/chats/${senderId}/${receiverId}`);
+        dispatch(
+          setMessagesForReceiver({ receiverId, messages: res.data || [] })
+        );
+        scrollToBottom();
+      } catch (err) {
+        console.error("Failed to fetch chat history", err);
+      }
+    };
+
+    fetchHistory();
+  }, [senderId, receiverId, dispatch]);
+
+  // Init socket + handle incoming messages
+  useEffect(() => {
+    if (!senderId) return;
+
+    const socket = initSocket();
+    socketRef.current = socket;
+    socket.emit("join", senderId);
+
+    const handleReceive = (msg) => {
+      const msgSender = String(msg.senderId || msg.sender);
+      const msgReceiver = String(msg.receiverId || msg.receiver);
+
+      const isRelated =
+        (msgSender === String(senderId) && msgReceiver === String(receiverId)) ||
+        (msgSender === String(receiverId) && msgReceiver === String(senderId));
+
+      if (isRelated) {
+        // 🧠 Prevent duplicate if it's your own message
+        if (msgSender === String(senderId)) return;
+
+        dispatch(addMessage({ receiverId, message: msg }));
+        scrollToBottom();
+      }
+    };
+
+    socket.on("receiveMessage", handleReceive);
+
+    return () => {
+      socket.off("receiveMessage", handleReceive);
+    };
+  }, [senderId, receiverId, dispatch]);
+
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+
+  // Send message
+  const sendMessage = async () => {
+    if (!newMessage.trim() || !senderId || !receiverId) return;
+
+    const payload = {
+      senderId,
+      receiverId,
+      message: newMessage.trim(),
+    };
+
+    // optimistic update
+    dispatch(addMessage({ receiverId, message: payload }));
+    setNewMessage("");
+    scrollToBottom();
+
+    const socket = getSocket();
+    if (socket) socket.emit("sendMessage", payload);
+  };
+
+  return (
+    <div className="lg:w-2xl flex flex-col h-full">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-2">
+        {messages.map((msg, idx) => {
+          const mine = String(msg.senderId || msg.sender) === String(senderId);
+          return (
+            <div key={msg._id || idx} className={`chat ${mine ? "chat-end" : "chat-start"}`}>
+              <div className={`chat-bubble ${mine ? "chat-bubble-secondary" : "chat-bubble-primary"}`}>
+                {msg.message}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex items-center gap-2 p-3 bg-white rounded shadow mt-3">
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          className="input input-bordered w-full"
+        />
+        <button
+          onClick={sendMessage}
+          className="btn bg-[#BA68C8] text-white hover:bg-[#a256b5]"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ViewAllChat;

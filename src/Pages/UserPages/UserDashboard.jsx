@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import lawyer from "../../assets/images/teacher.jpg";
 import { FiMessageCircle, FiUsers, FiHeart } from "react-icons/fi";
+import { chatPartners, fetchAllVolunteers } from "../../redux-store/features/users/userThunks";
 
 const UserDashboard = () => {
   const { user } = useSelector((store) => store.isUserLoggedIn);
+  const { partners } = useSelector((store) => store.chatPartnersData);
+  const { volunteers } = useSelector((store) => store.volunteers);
+  //console.log(volunteers)
+  const dispatch = useDispatch()
+  //console.log('pat',partners)
 
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
 
+  useEffect(() => {
+    if (user?._id) {
+      dispatch(chatPartners(user._id));
+    }
+    dispatch(fetchAllVolunteers())
+  }, [dispatch, user]);
 
   return (
     <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700">
@@ -31,62 +43,44 @@ const UserDashboard = () => {
               <FiMessageCircle className="text-[#BA68C8]" /> Recent Chats
             </h3>
 
+            {partners.map((partner, index) => (
+              <div
+                key={partner._id || index}
+                className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow"
+              >
+                <div className="flex gap-4 items-center">
+                  <div className="avatar">
+                    <div className="w-10 rounded-full ring-2 ring-[#BA68C8]">
+                      {partner?.profilePic ? (
+                        <img
+                          src={`http://localhost:8000/${partner?.profilePic}`}
+                          alt="user"
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#BA68C8] font-semibold uppercase">
+                          {partner?.firstName?.[0]}
+                          {partner?.lastName?.[0]}
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
-              <div className="flex gap-4 items-center">
-                <div className="avatar">
-                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
-                    <img src={lawyer} alt="Sister Avatar" />
+                  <div>
+                    <p className="font-semibold">
+                      {capitalize(partner?.firstName)} {capitalize(partner?.lastName)}
+                    </p>
+                    <p className="text-sm text-gray-500">{partner.proffession}</p>
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold">Nkunim Asaa Osei</p>
-                  <p className="text-sm text-gray-500">Psychologist</p>
-                </div>
+
+                <NavLink key={partner._id}
+                  to={`/chatbox/${partner._id}`}>
+                  <span className="text-[#BA68C8] underline text-sm">Continue</span>
+                </NavLink>
               </div>
-              <NavLink to="/chat">
-                <span className="text-[#BA68C8] underline text-sm">
-                  Continue
-                </span>
-              </NavLink>
-            </div>
-            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
-              <div className="flex gap-4 items-center">
-                <div className="avatar">
-                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
-                    <img src={lawyer} alt="Sister Avatar" />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-semibold">Nkunim Asaa Osei</p>
-                  <p className="text-sm text-gray-500">Psychologist</p>
-                </div>
-              </div>
-              <NavLink to="/chat">
-                <span className="text-[#BA68C8] underline text-sm">
-                  Continue
-                </span>
-              </NavLink>
-            </div>
-            <div className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow">
-              <div className="flex gap-4 items-center">
-                <div className="avatar">
-                  <div className="w-14 rounded-full ring-2 ring-[#BA68C8]">
-                    <img src={lawyer} alt="Sister Avatar" />
-                  </div>
-                </div>
-                <div>
-                  <p className="font-semibold">Nkunim Asaa Osei</p>
-                  <p className="text-sm text-gray-500">Psychologist</p>
-                </div>
-              </div>
-              <NavLink to="/chat">
-                <span className="text-[#BA68C8] underline text-sm">
-                  Continue
-                </span>
-              </NavLink>
-            </div>
-            
+            ))}
+
 
             <div className="text-center mt-3">
               <NavLink to="/chatbox">
@@ -103,23 +97,26 @@ const UserDashboard = () => {
               <FiUsers /> Sisters Directory
             </h3>
 
-
-            <div className="flex items-center justify-between bg-[#a64db3] p-4 rounded-lg mb-3 shadow">
-              <div className="flex gap-4 items-center">
-                <div className="avatar">
-                  <div className="w-14 rounded-full ring-2 ring-white">
-                    <img src={lawyer} alt="Sister Avatar" />
+            {volunteers.length > 0 && (
+              <div className="flex items-center justify-between bg-[#a64db3] p-4 rounded-lg mb-3 shadow">
+                <div className="flex gap-4 items-center">
+                  <div className="avatar">
+                    <div className="w-14 rounded-full ring-2 ring-white">
+                      <img src={`http://localhost:8000/${volunteers[0]?.profilePic}`} alt="Sister Avatar" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold">
+                      {capitalize(volunteers[0]?.firstName)} {capitalize(volunteers[0]?.lastName)}
+                    </p>
+                    <p className="text-sm">{volunteers[0]?.proffession}</p>
                   </div>
                 </div>
-                <div>
-                  <p className="font-semibold">Nkunim Asaa</p>
-                  <p className="text-sm">Psychologist</p>
-                </div>
+                <NavLink to="/chatbox">
+                  <span className="underline text-sm">Start Chat</span>
+                </NavLink>
               </div>
-              <NavLink to="/chat">
-                <span className="underline text-sm">Start Chat</span>
-              </NavLink>
-            </div>
+            )}
 
             <div className="text-center mt-3">
               <NavLink to="/allsisters">
@@ -141,7 +138,7 @@ const UserDashboard = () => {
                 </button>
               </NavLink>
             </div>
-            
+
           </div>
         </div>
 

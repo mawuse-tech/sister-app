@@ -10,79 +10,6 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllVolunteers, fourPerPage, isUserLoggedIn } from '../../redux-store/features/users/userThunks'
 
-export const sisterData = [
-  {
-    id: 1,
-    image: testi,
-    name: "Perfect Patience",
-    proffession: "Teacher",
-    available: "availabe",
-    message: "hi perfect thanks s...."
-
-
-  },
-  {
-    id: 2,
-    image: teacher,
-    name: "Efuwa Mensah York",
-    proffession: "Doctor",
-    available: "not Available",
-    message: "Efuwa are you ava...."
-
-  },
-  {
-    id: 3,
-    image: onek,
-    name: "Nkunim Asaah Osei",
-    proffession: "Counsellor",
-    available: "available",
-    message: "i contaced you yest...."
-
-  },
-  {
-    id: 4,
-    image: teacher,
-    name: "Eunice Asamoah",
-    proffession: "Lawyer",
-    available: "not available",
-    message: "hello please i am a...."
-
-  },
-  {
-    id: 5,
-    image: wo,
-    name: "Eunice Asamoah",
-    proffession: "Lawyer",
-    available: "not available",
-    message: "sorry about what...."
-
-  },
-  {
-    id: 6,
-    image: teacher,
-    name: "Eunice Asamoah",
-    proffession: "Lawyer",
-    available: "not available",
-
-  },
-  {
-    id: 7,
-    image: teacher,
-    name: "Eunice Asamoah",
-    proffession: "Lawyer",
-    available: "not available",
-
-  },
-  {
-    id: 8,
-    image: teacher,
-    name: "Eunice Asamoah",
-    proffession: "Lawyer",
-    available: "not available",
-
-  }
-]
-
 const ViewAllSisters = () => {
   // const sistersPerPage = 4;
   // const [currentPage, setCurrentPage] = useState(1);
@@ -196,21 +123,32 @@ const ViewAllSisters = () => {
         </div>
       </div>
 
-
       {/* Body Section */}
       <div className="bg-[#f7f0f8]  h-full pt-6 px-2 lg:px-4 md:px-4 text-gray-700">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4 md:gap-4 gap-2">
 
-          {volunteers.length === 0 ? (
-            <div className='lg:h-44 md:h-40 h-72 col-span-full'>
-              <p className="text-center text-red-600 mt-4 font-bold">
-                No volunteer found for this search.
+          {loading ? (
+            // 🔹 Show loading state first
+            <div className="col-span-full flex justify-center items-center h-72">
+              <p className="text-[#BA68C8] text-lg font-semibold animate-pulse">
+                Loading volunteers...
               </p>
             </div>
-          ) :
-            (volunteers.map((volunteer) => (
+          ) : error ? (
+            // 🔹 Show error state
+            <div className="col-span-full flex justify-center items-center h-72">
+              <p className="text-red-500 font-semibold">Error: {error}</p>
+            </div>
+          ) : volunteers.length === 0 ? (
+            // 🔹 Only show "No results" if not loading or error
+            <div className="col-span-full flex justify-center items-center h-72">
+              <p className="text-red-600 font-semibold">No volunteer found for this search.</p>
+            </div>
+          ) : (
+            // 🔹 Show the list of volunteers
+            volunteers.map((volunteer) => (
               <div
-                key={volunteer._id}
+                key={volunteer?._id}
                 className="bg-[#BA68C8] rounded shadow-md flex flex-col gap-1 items-center justify-center"
               >
                 <img
@@ -221,35 +159,32 @@ const ViewAllSisters = () => {
                 <p className="text-center font-semibold text-lg text-white">
                   {`${capitalize(volunteer?.firstName)} ${capitalize(volunteer?.lastName)}`}
                 </p>
-
-                <p className="text-center font-medium text-sm text-white mb-2">{capitalize(volunteer?.proffession)}</p>
-
+                <p className="text-center font-medium text-sm text-white mb-2">
+                  {capitalize(volunteer?.proffession)}
+                </p>
                 <div className="flex justify-center gap-4 mb-3">
-                  <NavLink to="/chat">
+                  <NavLink to={`/chatBox/${volunteer._id}`}>
                     <span className="text-white border hover:text-white transition-all duration-200 rounded px-3 py-1 text-sm font-semibold cursor-pointer">
                       Chat
                     </span>
                   </NavLink>
-
                   <NavLink to={`/allsisters/${volunteer._id}`}>
-                    <span className="text-white border shadow-2xl hover:text-white transitio rounded px-3 py-1 text-sm font-semibold cursor-pointer">
+                    <span className="text-white border shadow-2xl hover:text-white rounded px-3 py-1 text-sm font-semibold cursor-pointer">
                       View Profile
                     </span>
                   </NavLink>
-
                 </div>
-
                 <span
-                  className={`block text-center mt-2 font-semibold text-sm px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2 ${volunteer.isAvailable ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                  className={`block text-center mt-2 font-semibold text-sm px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2 ${volunteer.isAvailable
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
                     }`}
                 >
                   {volunteer.isAvailable ? "Available" : "Unavailable"}
                 </span>
-
-
-
               </div>
-            )))}
+            ))
+          )}
 
         </div>
 

@@ -134,7 +134,7 @@ const DashboardStructure = ({ title, }) => {
                     </div>
                   </NavLink>
 
-                  <NavLink to="/chat"
+                  <NavLink to="/chatBox"
                     end
                     className={({ isActive }) =>
                       `p-1 rounded flex items-center gap-2 ${isActive ? "bg-white text-black" : "text-white"}`

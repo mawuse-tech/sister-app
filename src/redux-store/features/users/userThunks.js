@@ -86,7 +86,7 @@ export const fetchAllVolunteers = createAsyncThunk("/allVolunteers",
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.get('/allVolunteer');
-      // console.log('-------',res.data.volunteers)
+      console.log('-------',res.data.volunteers)
       return res.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || "Something went wrong, please try again later");
@@ -116,4 +116,32 @@ export const fourPerPage = createAsyncThunk(
     }
   }
 );
+
+export const chatPartners = createAsyncThunk("chat-partners",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const res = await api.get(`/chats/partners/${userId}`);
+      return res.data
+    } catch (error) {
+      console.log(error)
+      return rejectWithValue(error.response?.data?.message || "Something went wrong, please try again later");
+    }
+  }
+);
+
+export const recentChatFunc = createAsyncThunk(
+  "recent-chats",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const res = await api.get(`/chats/recentChat/${userId}`);
+      return res.data; //  includes success + data
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(
+        error.response?.data?.message || "Something went wrong, please try again later"
+      );
+    }
+  }
+);
+
 

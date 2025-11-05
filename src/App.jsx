@@ -6,7 +6,6 @@ import { isUserLoggedIn } from './redux-store/features/users/userThunks'
 import RootLayout from './LayoutPage/RootLayout'
 import DashboardStructure from './LayoutPage/DashboardStructure'
 import ProfileLayout from './LayoutPage/ProfileLayout'
-import ChatLayout from './LayoutPage/ChatLayout'
 
 import Hero from './Pages/HomePages/Hero'
 import AboutUs from './Pages/HomePages/AboutUs'
@@ -29,6 +28,10 @@ import SisterProfile from './Pages/UserPages/SisterProfile'
 import ViewAllChat from './Pages/UserPages/ViewAllChat'
 
 import { PrivateRoute, PublicRoute } from './helpers/ProtectRoute'
+import Chat from './Pages/UserPages/Chat'
+import ChatsLayout from './LayoutPage/ChatsLayout'
+
+
 
 const router = createBrowserRouter([
   {
@@ -93,24 +96,7 @@ const router = createBrowserRouter([
           </PublicRoute>
         )
       },
-      {
-        path: "chatbox",
-        element: (
-          <PrivateRoute>
-            <ChatLayout />
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            index: true, 
-            element: <ViewAllChat />
-          },
-          {
-            path: ":id", 
-            element: <ViewAllChat />
-          }
-        ]
-      },
+
       {
         path: "sisdash",
         element: (
@@ -163,16 +149,28 @@ const router = createBrowserRouter([
           }
         ]
       },
-      // {
-      //   path: "chat",
-      //   element: (
-      //     <PrivateRoute>
-      //       <ViewAllChat />
-      //     </PrivateRoute>
-      //   )
-      // }
     ]
-  }
+  },
+
+  {
+    path: "/chatbox",
+    element: (
+      <PrivateRoute>
+        <ChatsLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Chat />
+      },
+      {
+        path: ":id",
+        element: <Chat />
+      },
+    ],
+  },
+
 ])
 
 const App = () => {

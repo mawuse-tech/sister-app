@@ -55,7 +55,7 @@ const SisterProfile = () => {
                 {/* <p>Accra, Ghana</p> */}
                 <p>{volunteer?.email}</p>
 
-                <NavLink to="/chat">
+                <NavLink to={`/chatBox/${volunteer?._id}`}>
                   <span className="bg-[#BA68C8] px-4 py-1 w-fit mx-auto lg:mx-0 rounded text-white text-sm cursor-pointer">
                     chat with me
                   </span>
