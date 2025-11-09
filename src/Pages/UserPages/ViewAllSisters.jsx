@@ -51,6 +51,10 @@ const ViewAllSisters = () => {
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
 
+  // This takes all professions → puts them in a Set (which removes duplicates) → converts back to an array.
+  const uniqueProfessions = [
+    ...new Set(allVolunteers.map((volunteer) => volunteer.proffession))
+  ];
 
   return (
     <>
@@ -84,13 +88,14 @@ const ViewAllSisters = () => {
                 tabIndex={0}
                 className="dropdown-content menu bg-[#BA68C8] rounded-box z-10 w-52 p-2 shadow-sm text-white"
               >
-                {allVolunteers.map((volunteer, index) => (
+                {uniqueProfessions.map((proff, index) => (
                   <li key={index}>
-                    <button onClick={() => setProffession(volunteer.proffession)}>
-                      {volunteer.proffession}
+                    <button onClick={() => setProffession(proff)}>
+                      {proff}
                     </button>
                   </li>
                 ))}
+
 
               </ul>
             </div>
@@ -176,8 +181,8 @@ const ViewAllSisters = () => {
                 </div>
                 <span
                   className={`block text-center mt-2 font-semibold text-sm px-4 py-1 rounded shadow-sm w-fit mx-auto mb-2 ${volunteer.isAvailable
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
                     }`}
                 >
                   {volunteer.isAvailable ? "Available" : "Unavailable"}

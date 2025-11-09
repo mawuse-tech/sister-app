@@ -54,25 +54,25 @@ const ChatPage = () => {
         // Fetch chat partners first
         const partnersData = await dispatch(chatPartners(user._id)).unwrap();
 
-        // 2️⃣ Check role: If user is a volunteer, show only chat partners
+        //  Check role: If user is a volunteer, show only chat partners
         if (user.isVolunteer) {
           setChatPartnersList(partnersData);
           return;
         }
 
-        // 3️⃣ Otherwise (if sister), fetch all volunteers
+        //  Otherwise (if sister), fetch all volunteers
         const allVolunteersResponse = await dispatch(fetchAllVolunteers()).unwrap();
         const allVolunteersData = Array.isArray(allVolunteersResponse)
           ? allVolunteersResponse
           : allVolunteersResponse.volunteers || [];
 
-        // 4️⃣ Filter out volunteers who are already partners
+        //  Filter out volunteers who are already partners
         const partnerIds = new Set(partnersData.map((p) => p._id));
         const nonPartners = allVolunteersData.filter(
           (volunteer) => !partnerIds.has(volunteer._id)
         );
 
-        // 5️⃣ Combine — partners first, then others
+        //  Combine — partners first, then others
         const combinedList = [...partnersData, ...nonPartners];
         setChatPartnersList(combinedList);
       } catch (error) {
@@ -82,14 +82,14 @@ const ChatPage = () => {
 
     fetchData();
 
-    // 6️⃣ Socket setup
+    //  Socket setup
     const socket = initSocket();
     socketRef.current = socket;
 
     socket.emit("join", user._id);
     socket.on("updateOnlineUsers", (users) => setOnlineUsers(users));
 
-    // 7️⃣ Cleanup
+    //  Cleanup
     return () => {
       socket.off("updateOnlineUsers");
     };
@@ -365,7 +365,7 @@ const ChatPage = () => {
 
         {/* Input area */}
         {selectedPartner && (
-          <div className="flex items-center justify-between bg-white px-4 py-3 border-t">
+          <div className="flex items-center justify-between bg-white px-4 py-3 border-t lg:px-20">
             <div className="flex items-center space-x-3 w-full">
               <FiSmile size={20} className="text-gray-500 cursor-pointer" />
               <input

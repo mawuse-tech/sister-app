@@ -11,7 +11,7 @@ const UserDashboard = () => {
   const { volunteers } = useSelector((store) => store.volunteers);
   //console.log(volunteers)
   const dispatch = useDispatch()
-  //console.log('pat',partners)
+  // console.log('pat',partners)
 
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
@@ -70,7 +70,13 @@ const UserDashboard = () => {
                     <p className="font-semibold">
                       {capitalize(partner?.firstName)} {capitalize(partner?.lastName)}
                     </p>
-                    <p className="text-sm text-gray-500">{partner.proffession}</p>
+                    <p className="text-sm text-gray-700">{capitalize(partner.proffession)}</p>
+                    <p className="text-sm text-gray-500">
+                      {partner?.lastMessage?.length > 80
+                        ? partner.lastMessage.slice(0, 50) + "..."
+                        : partner?.lastMessage}
+                    </p>
+
                   </div>
                 </div>
 

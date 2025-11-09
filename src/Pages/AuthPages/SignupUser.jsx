@@ -45,7 +45,6 @@ const SignupUser = () => {
 
           {/* left Side */}
           <div className="lg:w-1/2 p-6  w-full">
-            <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
             <div className='flex items-center justify-center'>
               <img src={signup} alt="sign up svg" />
             </div>
@@ -69,7 +68,7 @@ const SignupUser = () => {
                       placeholder="Enter first name"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     />
                   </div>
 
@@ -81,7 +80,7 @@ const SignupUser = () => {
                       placeholder="Enter last name"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     />
                   </div>
 
@@ -94,7 +93,7 @@ const SignupUser = () => {
                   placeholder="Enter email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                 />
 
                 <div className='flex gap-2'>
@@ -107,7 +106,7 @@ const SignupUser = () => {
                       placeholder="Enter password"
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                     />
                   </div>
 
@@ -119,7 +118,7 @@ const SignupUser = () => {
                       placeholder="confirm password"
                       value={formData.confirmPassword}
                       onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                      className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                     />
                   </div>
                 </div>

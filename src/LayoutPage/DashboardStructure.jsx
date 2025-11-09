@@ -152,10 +152,10 @@ const DashboardStructure = ({ title, }) => {
                       `p-1 rounded flex items-center gap-2 ${isActive ? "bg-white text-black" : "text-white"}`
                     }
                   >
-                    <div className='flex items-center gap-2'>
+                    {/* <div className='flex items-center gap-2'>
                       <MdSettings className='text-[1.8rem]' />
                       <span className='text-[1.2rem]'>Settings</span>
-                    </div>
+                    </div> */}
                   </NavLink>
                 </div>
 

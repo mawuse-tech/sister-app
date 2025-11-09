@@ -34,9 +34,7 @@ const ForgotPassword = () => {
       <div className="bg-white w-full max-w-4xl rounded-xl border border-gray-600 flex flex-col lg:flex-row overflow-hidden">
         {/* Left Side */}
         <div className="lg:w-1/2 p-6 w-full">
-          <div>
-            <span className="font-bold mb-2 text-gray-700">Sister Sister</span>
-          </div>
+          
           <div className="flex items-center justify-center">
             <img src={forgot} alt="Forgot password illustration" />
           </div>
@@ -59,7 +57,7 @@ const ForgotPassword = () => {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input border border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                className="input border border-gray-200 w-full mb-4 text-gray-700 bg-white"
                 required
               />
 

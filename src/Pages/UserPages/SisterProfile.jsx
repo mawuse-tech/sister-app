@@ -29,9 +29,9 @@ const SisterProfile = () => {
 
   return (
     <>
-      <div className="bg-[#BA68C8] h-[10rem] lg:h-36 relative flex justify-center">
+      <div className="bg-[#BA68C8] h-[10rem] lg:h-30 relative flex justify-center">
 
-        <div className='absolute lg:top-10 top-10 text-center text-white'>
+        <div className='absolute lg:top-5 top-10 text-center text-white'>
           <h3 className='text-[2rem]'>Welcome to my profile</h3>
           <p>hey I am here for you, you can trust me, just hit the chat button</p>
         </div>
@@ -54,6 +54,17 @@ const SisterProfile = () => {
                 <p>{capitalize(volunteer?.proffession)}</p>
                 {/* <p>Accra, Ghana</p> */}
                 <p>{volunteer?.email}</p>
+
+                {volunteer?.linkedInLink && (
+            <a
+              href={volunteer?.linkedInLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#BA68C8] hover:underline font-medium"
+            >
+              My LinkedIn profile
+            </a>
+          )}
 
                 <NavLink to={`/chatBox/${volunteer?._id}`}>
                   <span className="bg-[#BA68C8] px-4 py-1 w-fit mx-auto lg:mx-0 rounded text-white text-sm cursor-pointer">

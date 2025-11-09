@@ -43,7 +43,6 @@ const LoginPage = () => {
 
           {/* left Side */}
           <div className="lg:w-1/2 p-6  w-full">
-            <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
             <div className='flex items-center justify-center'>
               <img src={loginsvg} alt="login svg" />
             </div>
@@ -65,19 +64,21 @@ const LoginPage = () => {
                   id="email"
                   type="text"
                   placeholder="Enter email"
+                  autoComplete='new-email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                  className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                 />
 
                 <label className="text-sm mb-1" htmlFor="password">Password</label>
                 <input
                   id="password"
+                  autoComplete='new-password'
                   type="password"
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                  className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                 />
 
                 <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>

@@ -57,7 +57,6 @@ const SignupSister = () => {
 
           {/* left Side */}
           <div className="lg:w-1/2 w-full">
-            <div><span className="font-bold mb-2 text-gray-700">Sister Sister</span></div>
             <div className='flex items-center justify-center'>
               <img className='lg:h-[30rem]' src={signup} alt="sign up svg" />
             </div>
@@ -80,7 +79,7 @@ const SignupSister = () => {
                       name='linkedInLink'
                       value={linkedInLink}
                       onChange={(e) => setLinkedInLink(e.target.value)}
-                      className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                       placeholder='optional'
                     />
                   </div>
@@ -93,7 +92,7 @@ const SignupSister = () => {
                       value={proffession}
                       onChange={(e) => setProffession(e.target.value)}
                       placeholder="Enter your proffession"
-                      className="input border-1 border-gray-500 w-full text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                     />
                   </div>
                 </div>
@@ -105,7 +104,7 @@ const SignupSister = () => {
                     minLength={50}     // minimum 50 characters
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
-                    className="textarea textarea-bordered border border-gray-500 w-full text-gray-700 bg-white"
+                    className="textarea textarea-bordered border border-gray-200 w-full text-gray-700 bg-white"
                     rows="4"
                     placeholder="Write something about yourself..."
                   ></textarea>
@@ -123,7 +122,7 @@ const SignupSister = () => {
                         setProfilePic(selectedFile)
                         // setPreview(URL.createObjectURL(selectedFile))
                       }}
-                      className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     /></div>
 
                   <div>
@@ -138,7 +137,7 @@ const SignupSister = () => {
                         const newFiles = Array.from(e.target.files); // newly selected files
                         setLincense(prev => [...prev, ...newFiles]);  // merge with previous files
                       }}
-                      className="input border-1 border-gray-500 w-full mb-4 text-gray-700 bg-white"
+                      className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     />
                   </div>
                 </div>
