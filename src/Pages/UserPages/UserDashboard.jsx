@@ -11,7 +11,6 @@ const UserDashboard = () => {
   const { volunteers } = useSelector((store) => store.volunteers);
   //console.log(volunteers)
   const dispatch = useDispatch()
-  // console.log('pat',partners)
 
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
