@@ -8,6 +8,10 @@ const volunteerSlice = createSlice({
         loading: false,
         error: null
     },
+     reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    }},
 
     extraReducers: (builder) => {
         builder
@@ -26,4 +30,5 @@ const volunteerSlice = createSlice({
     },
 });
 
+export const { setError } = volunteerSlice.actions
 export default volunteerSlice.reducer

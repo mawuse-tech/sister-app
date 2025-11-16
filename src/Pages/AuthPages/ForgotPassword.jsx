@@ -31,24 +31,28 @@ const ForgotPassword = () => {
 
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
-      <div className="bg-white w-full max-w-4xl rounded-xl border border-gray-600 flex flex-col lg:flex-row overflow-hidden">
+      <div className="bg-white w-full max-w-4xl rounded-xl border border-gray-600 flex flex-col lg:flex-row overflow-hidden mx-6 py-3">
         {/* Left Side */}
         <div className="lg:w-1/2 p-6 w-full">
-          
+
           <div className="flex items-center justify-center">
             <img src={forgot} alt="Forgot password illustration" />
           </div>
         </div>
 
         {/* Right Side */}
-        <div className="lg:w-1/2 p-6 flex text-gray-700 w-full mt-10">
+        <div className="lg:w-1/2 p-6 flex text-gray-700 w-full mt-10 text-base">
           <div>
             <p className="mb-4 text-3xl font-medium lg:w-[25rem] md:w-[25rem] lg:mt-10">
               Enter your email to <br /> receive a link
             </p>
 
             <form onSubmit={handleSubmit}>
-              <label className="text-sm mb-1" htmlFor="email">
+              {errormessage && (
+                <p className="text-red-500 text-sm">{errormessage}</p>
+              )}
+
+              <label className="text-base mb-1" htmlFor="email">
                 Email address
               </label>
               <input
@@ -56,14 +60,13 @@ const ForgotPassword = () => {
                 type="email"
                 placeholder="Enter email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input border border-gray-200 w-full mb-4 text-gray-700 bg-white"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrormessage(null); // clear local error on typing
+                }}
+                className="input border border-gray-200 w-full mb-4 text-gray-700 bg-white px-4 py-3 rounded"
                 required
               />
-
-              {errormessage && (
-                <p className="text-red-500 text-sm">{errormessage}</p>
-              )}
 
               <div className="bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white">
                 <button

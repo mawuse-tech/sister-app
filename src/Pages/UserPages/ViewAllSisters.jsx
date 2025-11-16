@@ -124,12 +124,12 @@ const ViewAllSisters = () => {
         {/* Section Title */}
         <div className="absolute top-44 lg:top-32 text-center text-gray-700 px-4">
           <h3 className="text-2xl md:text-3xl font-semibold">Meet All Sisters</h3>
-          <p className="mt-2 pb-4 text-sm md:text-base">Browse through available sisters and start a chat</p>
+          <p className="mt-2 text-sm md:text-base">Browse through available sisters and start a chat</p>
         </div>
       </div>
 
       {/* Body Section */}
-      <div className="bg-[#f7f0f8]  h-full pt-6 px-2 lg:px-4 md:px-4 text-gray-700">
+      <div className="bg-[#f7f0f8] h-full px-2 lg:px-4 md:px-4 text-gray-700">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4 md:gap-4 gap-2">
 
           {loading ? (
@@ -157,7 +157,7 @@ const ViewAllSisters = () => {
                 className="bg-[#BA68C8] rounded shadow-md flex flex-col gap-1 items-center justify-center"
               >
                 <img
-                  src={`http://localhost:8000/${volunteer?.profilePic}`}
+                  src={volunteer?.profilePic}
                   alt={volunteer?.name}
                   className="w-full lg:h-60 md:h-60 h-36 object-cover rounded-t"
                 />

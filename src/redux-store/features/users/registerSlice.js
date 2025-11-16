@@ -8,6 +8,10 @@ export const registerSlice = createSlice({
         loading: false,
         error: null
     },
+    reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    }},
 
     extraReducers: (builder) => {
         builder
@@ -25,6 +29,6 @@ export const registerSlice = createSlice({
             })
     }
 });
-
+export const { setError } = registerSlice.actions
 export default registerSlice.reducer
 

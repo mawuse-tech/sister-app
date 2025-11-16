@@ -26,9 +26,10 @@ const SisterDashboard = () => {
         <div className="avatar">
           <div className="w-24 md:w-32 lg:w-36 rounded-full ring-[#BA68C8] ring-offset-[#5651AB] ring-1">
             <img
-              src={`http://localhost:8000/${user.profilePic}`}
+              src={user.profilePic}
               alt="Sister Avatar"
             />
+
           </div>
         </div>
         <div className="text-[1.1rem] flex flex-col justify-center">

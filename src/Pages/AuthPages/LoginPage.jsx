@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isUserLoggedIn, loginUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
+import { setError } from '../../redux-store/features/users/loginSlice';
 
 const LoginPage = () => {
 
@@ -24,9 +25,9 @@ const LoginPage = () => {
 
       if (response.success === true) {
         toast.success("Login successful!");
-        
+
         dispatch(isUserLoggedIn())
-          navigate('/userdash')
+        navigate('/userdash')
       };
 
     } catch (error) {
@@ -39,17 +40,17 @@ const LoginPage = () => {
     <>
       <div className="bg-white min-h-screen flex items-center justify-center">
         {/* Card section */}
-        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
+        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden mx-6 py-3">
 
           {/* left Side */}
-          <div className="lg:w-1/2 p-6  w-full">
+          <div className="lg:w-1/2 p-6 w-full">
             <div className='flex items-center justify-center'>
               <img src={loginsvg} alt="login svg" />
             </div>
 
           </div>
           {/* Right Side */}
-          <div className="lg:w-1/2 p-6 flex text-gray-700 w-full mt-10">
+          <div className="lg:w-1/2 lg:p-6 md:p-6 px-7 flex text-gray-700 text-base w-full mt-10">
 
             <div>
               <p className="mb-4 text-3xl font-medium">Welcome Back</p>
@@ -59,25 +60,31 @@ const LoginPage = () => {
 
               <form action="" onSubmit={hadndleSubmit}>
 
-                <label className="text-sm mb-1" htmlFor="email">Email address</label>
+                <label className="text-base mb-1" htmlFor="email">Email address</label>
                 <input
                   id="email"
                   type="text"
                   placeholder="Enter email"
                   autoComplete='new-email'
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) dispatch(setError(null)); // clear redux error
+                  }}
                   className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                 />
 
-                <label className="text-sm mb-1" htmlFor="password">Password</label>
+                <label className="text-base mb-1" htmlFor="password">Password</label>
                 <input
                   id="password"
                   autoComplete='new-password'
                   type="password"
                   placeholder="Enter password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (error) dispatch(setError(null)); // clear redux error
+                  }}
                   className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                 />
 

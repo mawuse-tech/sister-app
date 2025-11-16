@@ -31,7 +31,7 @@ const UserDashboard = () => {
             Welcome, <span className="text-[#BA68C8]">{capitalize(user?.firstName)}</span>
           </h2>
           <p className="text-gray-600 mt-2">
-            We’re glad to have you back. Here’s what’s happening:
+            We’re glad to have you here. Here’s what’s happening:
           </p>
         </div>
 
@@ -42,55 +42,58 @@ const UserDashboard = () => {
               <FiMessageCircle className="text-[#BA68C8]" /> Recent Chats
             </h3>
 
-            {partners.map((partner, index) => (
-              <div
-                key={partner._id || index}
-                className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow"
-              >
-                <div className="flex gap-4 items-center">
-                  <div className="avatar">
-                    <div className="w-10 rounded-full ring-2 ring-[#BA68C8]">
-                      {partner?.profilePic ? (
-                        <img
-                          src={`http://localhost:8000/${partner?.profilePic}`}
-                          alt="user"
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#BA68C8] font-semibold uppercase">
-                          {partner?.firstName?.[0]}
-                          {partner?.lastName?.[0]}
-                        </div>
-                      )}
+            {partners && partners.length > 0 ? (
+              partners.map((partner, index) => (
+                <div
+                  key={partner._id || index}
+                  className="flex items-center justify-between bg-white p-4 rounded-lg mb-3 shadow"
+                >
+                  <div className="flex gap-4 items-center">
+                    <div className="avatar">
+                      <div className="w-10 rounded-full ring-2 ring-[#BA68C8]">
+                        {partner?.profilePic ? (
+                          <img
+                            src={`http://localhost:8000/${partner?.profilePic}`}
+                            alt="user"
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#BA68C8] font-semibold uppercase">
+                            {partner?.firstName?.[0]}
+                            {partner?.lastName?.[0]}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold">
+                        {capitalize(partner?.firstName)} {capitalize(partner?.lastName)}
+                      </p>
+                      <p className="text-sm text-gray-700">{capitalize(partner.proffession)}</p>
+                      <p className="text-sm text-gray-500">
+                        {partner?.lastMessage?.length > 80
+                          ? partner.lastMessage.slice(0, 50) + "..."
+                          : partner?.lastMessage}
+                      </p>
                     </div>
                   </div>
 
-                  <div>
-                    <p className="font-semibold">
-                      {capitalize(partner?.firstName)} {capitalize(partner?.lastName)}
-                    </p>
-                    <p className="text-sm text-gray-700">{capitalize(partner.proffession)}</p>
-                    <p className="text-sm text-gray-500">
-                      {partner?.lastMessage?.length > 80
-                        ? partner.lastMessage.slice(0, 50) + "..."
-                        : partner?.lastMessage}
-                    </p>
-
-                  </div>
+                  <NavLink to={`/chatbox/${partner._id}`}>
+                    <span className="text-[#BA68C8] underline text-sm">Continue</span>
+                  </NavLink>
                 </div>
-
-                <NavLink key={partner._id}
-                  to={`/chatbox/${partner._id}`}>
-                  <span className="text-[#BA68C8] underline text-sm">Continue</span>
-                </NavLink>
+              ))
+            ) : (
+              <div className="text-center text-gray-600 py-10">
+                You don’t have any recent chats yet. Start a conversation and stay connected!
               </div>
-            ))}
-
+            )}
 
             <div className="text-center mt-3">
               <NavLink to="/chatbox">
                 <span className="text-[#BA68C8] underline italic">
-                  View all chats...
+                  Visit chat room...
                 </span>
               </NavLink>
             </div>
@@ -107,7 +110,7 @@ const UserDashboard = () => {
                 <div className="flex gap-4 items-center">
                   <div className="avatar">
                     <div className="w-14 rounded-full ring-2 ring-white">
-                      <img src={`http://localhost:8000/${volunteers[0]?.profilePic}`} alt="Sister Avatar" />
+                      <img src={volunteers[0]?.profilePic} alt="Sister Avatar" />
                     </div>
                   </div>
                   <div>
@@ -124,8 +127,10 @@ const UserDashboard = () => {
             )}
 
             <div className="text-center mt-3">
-              <NavLink to="/allsisters">
-                <span className="underline italic">View all sisters...</span>
+               <NavLink to="/allsisters">
+                <button className="px-6 py-2 my-2 bg-white text-[#BA68C8] rounded-lg shadow hover:bg-[#ece8ec] transition">
+                  View all sisters
+                </button>
               </NavLink>
             </div>
 

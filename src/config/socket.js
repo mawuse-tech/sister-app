@@ -5,7 +5,7 @@ let socket;
 
 export const initSocket = () => {
   if (!socket) {
-    socket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:6000", {
+    socket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:8000", {
       withCredentials: true,
     });
   }

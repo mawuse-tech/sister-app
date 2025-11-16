@@ -33,7 +33,7 @@ const SisterProfile = () => {
 
         <div className='absolute lg:top-5 top-10 text-center text-white'>
           <h3 className='text-[2rem]'>Welcome to my profile</h3>
-          <p>hey I am here for you, you can trust me, just hit the chat button</p>
+          <p className='px-4'>hey I am here for you, you can trust me, just hit the chat button</p>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ const SisterProfile = () => {
             <div className="flex flex-col items-center gap-4 w-full">
               <div className="avatar">
                 <div className="w-36 rounded-full ring-[#BA68C8] ring-offset-[#BA68C8] ring-2">
-                  <img src={`http://localhost:8000/${volunteer?.profilePic}`}
+                  <img src={volunteer?.profilePic}
                     alt={volunteer?.name} />
                 </div>
               </div>
@@ -56,15 +56,15 @@ const SisterProfile = () => {
                 <p>{volunteer?.email}</p>
 
                 {volunteer?.linkedInLink && (
-            <a
-              href={volunteer?.linkedInLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#BA68C8] hover:underline font-medium"
-            >
-              My LinkedIn profile
-            </a>
-          )}
+                  <a
+                    href={volunteer?.linkedInLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#BA68C8] hover:underline font-medium"
+                  >
+                    My LinkedIn profile
+                  </a>
+                )}
 
                 <NavLink to={`/chatBox/${volunteer?._id}`}>
                   <span className="bg-[#BA68C8] px-4 py-1 w-fit mx-auto lg:mx-0 rounded text-white text-sm cursor-pointer">
@@ -91,15 +91,24 @@ const SisterProfile = () => {
             <div className="text-gray-700 flex flex-col gap-2">
               <p className="font-semibold text-xl md:text-2xl">Available Days</p>
 
-              {volunteer?.availability?.map((slot) => (
-                <div
-                  key={slot._id}
-                  className="bg-[#f7f0f8] shadow flex justify-between px-4 py-2 w-full lg:w-2/3 rounded-md text-sm md:text-base"
-                >
-                  <span>{slot.day}</span>
-                  <p>{moment(slot.startTime, "HH:mm").format("hh:mm A")} –{moment(slot.endTime, "HH:mm").format("hh:mm A")}</p>
-                </div>
-              ))}
+              {volunteer?.availability && volunteer.availability.length > 0 ? (
+                volunteer.availability.map((slot) => (
+                  <div
+                    key={slot._id}
+                    className="bg-[#f7f0f8] shadow flex justify-between px-4 py-2 w-full lg:w-2/3 rounded-md text-sm md:text-base"
+                  >
+                    <span>{slot.day}</span>
+                    <p>
+                      {moment(slot.startTime, "HH:mm").format("hh:mm A")} –{" "}
+                      {moment(slot.endTime, "HH:mm").format("hh:mm A")}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500 text-sm md:text-base mt-2">
+                  No available days yet. Please check back later! 
+                </p>
+              )}
             </div>
 
           </div>

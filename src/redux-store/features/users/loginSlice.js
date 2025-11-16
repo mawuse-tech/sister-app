@@ -9,6 +9,11 @@ export const loginSlice = createSlice({
         loading: false,
         error: null
     },
+    reducers: {
+        setError: (state, action) => {
+            state.error = action.payload;
+        }
+    },
 
     extraReducers: (builder) => {
         builder
@@ -27,4 +32,5 @@ export const loginSlice = createSlice({
     }
 });
 
+export const { setError } = loginSlice.actions
 export default loginSlice.reducer

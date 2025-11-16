@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn, registerUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
-
+import { setError } from '../../redux-store/features/users/registerSlice';
 
 const SignupUser = () => {
 
@@ -36,12 +36,11 @@ const SignupUser = () => {
     }
   }
 
-
   return (
     <>
       <div className="bg-white min-h-screen flex items-center justify-center">
         {/* Card section */}
-        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden ">
+        <div className="bg-white w-full max-w-4xl rounded-xl border-1 border-gray-600 flex flex-col lg:flex-row overflow-hidden mx-6 py-3">
 
           {/* left Side */}
           <div className="lg:w-1/2 p-6  w-full">
@@ -51,7 +50,7 @@ const SignupUser = () => {
 
           </div>
           {/* Right Side */}
-          <div className="lg:w-1/2 p-6 flex text-gray-700 w-full lg:mt-5">
+          <div className="lg:w-1/2 p-6 flex text-gray-700 w-full lg:mt-5 text-base">
 
             <div>
               <p className="mb-4 text-3xl font-medium">Create an Account</p>
@@ -61,63 +60,93 @@ const SignupUser = () => {
               <form action="" onSubmit={handleSubmit}>
                 <div className='flex gap-2'>
                   <div>
-                    <label className="text-sm mb-1" htmlFor="email">First Name</label>
+                    <label className="text-base mb-1" htmlFor="email">First Name</label>
                     <input
                       id="firstName"
                       type="text"
                       placeholder="Enter first name"
                       value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, firstName: e.target.value });
+                        // Only clear error if there is one
+                        if (error) {
+                          dispatch(setError(null));
+                        }
+                      }}
                       className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm mb-1" htmlFor="email">Last Name</label>
+                    <label className="text-base mb-1" htmlFor="email">Last Name</label>
                     <input
                       id="lastName"
                       type="text"
                       placeholder="Enter last name"
                       value={formData.lastName}
-                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, lastName: e.target.value });
+                        // Only clear error if there is one
+                        if (error) {
+                          dispatch(setError(null));
+                        }
+                      }}
                       className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                     />
                   </div>
 
                 </div>
 
-                <label className="text-sm mb-1" htmlFor="email">Email address</label>
+                <label className="text-base mb-1" htmlFor="email">Email address</label>
                 <input
                   id="email"
                   type="email"
                   placeholder="Enter email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+
+                    // Only clear error if there is one
+                    if (error) {
+                      dispatch(setError(null));
+                    }
+                  }}
+                  className="input border border-gray-200 w-full mb-4 text-gray-700 bg-white px-4 py-3 rounded"
                 />
 
                 <div className='flex gap-2'>
-
                   <div>
-                    <label className="text-sm mb-1" htmlFor="password">Password</label>
+                    <label className="text-base mb-1" htmlFor="password">Password</label>
                     <input
                       id="password"
                       type="password"
                       placeholder="Enter password"
                       value={formData.password}
-                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, password: e.target.value });
+                        // Only clear error if there is one
+                        if (error) {
+                          dispatch(setError(null));
+                        }
+                      }}
                       className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm mb-1" htmlFor="confirmPassword">Confirm Password</label>
+                    <label className="text-base mb-1" htmlFor="confirmPassword">Confirm Password</label>
                     <input
                       id="confirmPassword"
                       type="password"
                       placeholder="confirm password"
                       value={formData.confirmPassword}
-                      onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, confirmPassword: e.target.value });
+                        // Only clear error if there is one
+                        if (error) {
+                          dispatch(setError(null));
+                        }
+                      }}
                       className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
                     />
                   </div>
@@ -136,7 +165,7 @@ const SignupUser = () => {
               </form>
 
               <NavLink to="/login">
-                <p className='text-gray-600 mt-1 text-sm' >Have an account? <span className='text-[#BA68C8] underline italic'>Sign In</span></p>
+                <p className='text-gray-600 mt-1 text-base' >Have an account? <span className='text-[#BA68C8] underline italic'>Sign In</span></p>
               </NavLink>
             </div>
           </div>
