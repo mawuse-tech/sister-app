@@ -180,7 +180,6 @@ const handleVolunteerClick = () => {
   </div>
 </div>
 
-
      <section className="w-full flex flex-col md:flex-row items-center justify-between bg-purple-100 py-16 px-6 md:px-16">
       {/* Left Text Section */}
       <div className="flex-1 bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center md:text-left mb-10 md:mb-0 transition-all duration-300 hover:shadow-xl">
@@ -346,7 +345,7 @@ const handleVolunteerClick = () => {
         no round-arounds, no jargon — just clear action and peace of mind.
       </p>
 </div>
-       <div className="flex flex-row md:flex-row justify-center items-center">
+       <div className="flex flex-wrap justify-center items-center gap-3">
         {steps.map((step, idx) => (
           <motion.div
             key={idx}
@@ -354,8 +353,8 @@ const handleVolunteerClick = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: idx * 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center space-y-4 max-w-xs p-6 bg-white rounded-xl shadow hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-          >
+             className="flex flex-col items-center space-y-4 w-full sm:w-auto max-w-xs p-6 bg-white rounded-xl shadow hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+    >
             {/* Circle with Icon */}
             <div className="w-20 h-20 rounded-full border-4 border-purple-600 flex items-center justify-center">
               {step.icon}
