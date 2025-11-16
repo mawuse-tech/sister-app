@@ -346,7 +346,7 @@ const handleVolunteerClick = () => {
         no round-arounds, no jargon — just clear action and peace of mind.
       </p>
 </div>
-       <div className="flex flex-row md:flex-row justify-center items-center gap-10">
+       <div className="flex flex-row md:flex-row justify-center items-center">
         {steps.map((step, idx) => (
           <motion.div
             key={idx}
@@ -399,7 +399,6 @@ const handleVolunteerClick = () => {
 </motion.div>
   </div>
 </section>
-
 
    {/* Articles Section */}
 <section className="py-16 px-4 bg-gray-50">
