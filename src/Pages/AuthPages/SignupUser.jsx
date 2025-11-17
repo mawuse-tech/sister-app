@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn, registerUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
 import { setError } from '../../redux-store/features/users/registerSlice';
+import PasswordInput from '../SharedComponentsPages/PasswordInput';
 
 const SignupUser = () => {
 
@@ -116,39 +117,38 @@ const SignupUser = () => {
 
                 <div className='flex gap-2'>
                   <div>
-                    <label className="text-base mb-1" htmlFor="password">Password</label>
-                    <input
-                      id="password"
-                      type="password"
-                      placeholder="Enter password"
+                    {/* <label className="text-base mb-1" htmlFor="password">Password</label> */}
+                    <PasswordInput
                       value={formData.password}
-                      onChange={(e) => {
-                        setFormData({ ...formData, password: e.target.value });
-                        // Only clear error if there is one
+                      onChange={(value) => {
+                        setFormData({ ...formData, password: value });
+
                         if (error) {
                           dispatch(setError(null));
                         }
                       }}
-                      className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
+                      label="Password"
+                      error={error}
+                      clearError={() => dispatch(setError(null))}
                     />
+
                   </div>
 
                   <div>
-                    <label className="text-base mb-1" htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="confirm password"
+                    {/* <label className="text-base mb-1" htmlFor="confirmPassword">Confirm Password</label> */}
+                    <PasswordInput
                       value={formData.confirmPassword}
-                      onChange={(e) => {
-                        setFormData({ ...formData, confirmPassword: e.target.value });
-                        // Only clear error if there is one
+                      onChange={(value) => {
+                        setFormData({ ...formData, confirmPassword: value });
                         if (error) {
                           dispatch(setError(null));
                         }
                       }}
-                      className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
+                      label="Confirm Password"
+                      error={error}
+                      clearError={() => dispatch(setError(null))}
                     />
+
                   </div>
                 </div>
 
@@ -156,10 +156,11 @@ const SignupUser = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
-                      }`}
+                    className={`flex justify-center items-center w-full h-full
+                      ${loading ? "cursor-not-allowed  pointer-events-none" : "cursor-pointer"}
+                      `}
                   >
-                    Sign up
+                    {loading ? "Signing Up..." : "Sign Up"}
                   </button>
                 </div>
               </form>

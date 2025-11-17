@@ -3,6 +3,7 @@ import reset from '../../assets/images/rest.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../config/axios';
 import toast from 'react-hot-toast';
+import PasswordInput from '../SharedComponentsPages/PasswordInput';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -53,27 +54,25 @@ const ResetPassword = () => {
             </p>
             <form onSubmit={handleSubmit}>
               
-              <label className="text-sm mb-1" htmlFor="password">New Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input border border-gray-500 w-full mb-4 text-gray-700 bg-white"
-                required
-              />
+              {/* <label className="text-sm mb-1" htmlFor="password">New Password</label> */}
+              <PasswordInput
+                  label="Enter new password"
+                  value={password}
+                  onChange={setPassword}
+                  error={error}
+                  clearError={() => dispatch(setError(null))}
+                  placeholder="Enter your new password"
+                />
 
-              <label className="text-sm mb-1" htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Confirm password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="input border border-gray-500 w-full text-gray-700 bg-white"
-                required
-              />
+              {/* <label className="text-sm mb-1" htmlFor="confirmPassword">Confirm Password</label> */}
+             <PasswordInput
+                  label="Confirm password"
+                  value={confirmPassword}
+                  onChange={setConfirmPassword}
+                  error={error}
+                  clearError={() => dispatch(setError(null))}
+                  placeholder="Enter your password"
+                />
 
               <button
                 type="submit"

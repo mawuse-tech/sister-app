@@ -53,7 +53,7 @@ const UserDashboard = () => {
                       <div className="w-10 rounded-full ring-2 ring-[#BA68C8]">
                         {partner?.profilePic ? (
                           <img
-                            src={`http://localhost:8000/${partner?.profilePic}`}
+                            src={partner?.profilePic}
                             alt="user"
                             className="w-10 h-10 rounded-full object-cover"
                           />

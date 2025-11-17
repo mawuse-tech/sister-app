@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { isUserLoggedIn, loginUser } from '../../redux-store/features/users/userThunks';
 import toast from 'react-hot-toast';
 import { setError } from '../../redux-store/features/users/loginSlice';
+import PasswordInput from '../SharedComponentsPages/PasswordInput';
 
 const LoginPage = () => {
 
@@ -74,31 +75,28 @@ const LoginPage = () => {
                   className="input border-1 border-gray-200 w-full mb-4 text-gray-700 bg-white"
                 />
 
-                <label className="text-base mb-1" htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  autoComplete='new-password'
-                  type="password"
-                  placeholder="Enter password"
+                {/* <label className="text-base mb-1" htmlFor="password">Password</label> */}
+                <PasswordInput
+                  label="Enter Password"
                   value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    if (error) dispatch(setError(null)); // clear redux error
-                  }}
-                  className="input border-1 border-gray-200 w-full text-gray-700 bg-white"
+                  onChange={setPassword}
+                  error={error}
+                  clearError={() => dispatch(setError(null))}
+                  placeholder="Enter your password"
                 />
 
                 <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
                   <button
                     type="submit"
                     disabled={loading}
-                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
-                      }`}
+                    className={`flex justify-center items-center w-full h-full
+                      ${loading ? "cursor-not-allowed  pointer-events-none" : "cursor-pointer"}
+                      `}
                   >
-                    Sign In
+                    {loading ? "Signing In..." : "Sign In"}
                   </button>
-
                 </div>
+
               </form>
 
               <div className='flex gap-4 mt-4'>

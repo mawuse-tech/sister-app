@@ -255,7 +255,7 @@ const ChatPage = () => {
               <div className="flex items-center space-x-3">
                 {partner?.profilePic ? (
                 <img
-                  src={`http://localhost:8000/${partner?.profilePic}`}
+                  src={partner?.profilePic}
                   alt="user"
                   className="w-10 h-10 rounded-full object-cover"
                 />
@@ -295,7 +295,7 @@ const ChatPage = () => {
             <div className="flex items-center space-x-3">
               {selectedPartner?.profilePic ? (
                 <img
-                  src={`http://localhost:8000/${selectedPartner?.profilePic}`}
+                  src={selectedPartner?.profilePic}
                   alt="user"
                   className="w-10 h-10 rounded-full object-cover"
                 />

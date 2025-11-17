@@ -68,13 +68,15 @@ const ForgotPassword = () => {
                 required
               />
 
-              <div className="bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white">
+              <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
                 <button
-                  className="cursor-pointer w-full"
                   type="submit"
                   disabled={loading}
+                  className={`flex justify-center items-center w-full h-full
+                      ${loading ? "cursor-not-allowed  pointer-events-none" : "cursor-pointer"}
+                      `}
                 >
-                  {loading ? "Sending..." : "Send email"}
+                  {loading ? "Sending Email..." : "Send Email"}
                 </button>
               </div>
             </form>
