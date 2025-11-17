@@ -155,16 +155,16 @@ const SignupSister = () => {
                   </div>
                 </div>
 
-                <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
+               <div className='bg-[#BA68C8] flex justify-center h-12 rounded-lg mt-4 text-white'>
                   <button
                     type="submit"
                     disabled={loading}
-                    className={` flex justify-center items-center ${loading ? "cursor-not-allowed" : "bg-[#BA68C8] cursor-pointer"
-                      }`}
+                    className={`flex justify-center items-center w-full h-full
+                      ${loading ? "cursor-not-allowed  pointer-events-none" : "cursor-pointer"}
+                      `}
                   >
-                    Submit
+                    {loading ? "Submiting..." : "Submit"}
                   </button>
-
                 </div>
               </form>
             </div>
