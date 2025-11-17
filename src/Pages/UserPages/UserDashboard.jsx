@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import lawyer from "../../assets/images/teacher.jpg";
 import { FiMessageCircle, FiUsers, FiHeart } from "react-icons/fi";
 import { chatPartners, fetchAllVolunteers } from "../../redux-store/features/users/userThunks";
+import toast from "react-hot-toast";
 
 const UserDashboard = () => {
   const { user } = useSelector((store) => store.isUserLoggedIn);
+  //  console.log(user.isVolunteer)
   const { partners } = useSelector((store) => store.chatPartnersData);
   const { volunteers } = useSelector((store) => store.volunteers);
   //console.log(volunteers)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const capitalize = (str) =>
     str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "";
@@ -21,6 +24,18 @@ const UserDashboard = () => {
     }
     dispatch(fetchAllVolunteers())
   }, [dispatch, user]);
+
+ const handleVolunteerClick = () => {
+  // check if user is already a volunteer
+  if (user.isVolunteer === true) {
+    toast.error("You are already a volunteer!");
+    return;
+  }
+
+  // navigate if user exists and is not a volunteer
+  navigate("/volunteer");
+};
+
 
   return (
     <div className="bg-[#f7f0f8] min-h-screen flex justify-center p-6 text-gray-700">
@@ -127,7 +142,7 @@ const UserDashboard = () => {
             )}
 
             <div className="text-center mt-3">
-               <NavLink to="/allsisters">
+              <NavLink to="/allsisters">
                 <button className="px-6 py-2 my-2 bg-white text-[#BA68C8] rounded-lg shadow hover:bg-[#ece8ec] transition">
                   View all sisters
                 </button>
@@ -142,11 +157,9 @@ const UserDashboard = () => {
               <p className="text-gray-600 mb-4">
                 Share your knowledge, support young women, and make a difference.
               </p>
-              <NavLink to="/volunteer">
-                <button className="px-6 py-2 bg-[#BA68C8] text-white rounded-lg shadow hover:bg-[#9c4eb0] transition">
-                  Fill Volunteer Form
-                </button>
-              </NavLink>
+              <button onClick={handleVolunteerClick} className="px-6 py-2 bg-[#BA68C8] text-white rounded-lg shadow hover:bg-[#9c4eb0] transition">
+                Fill Volunteer Form
+              </button>
             </div>
 
           </div>

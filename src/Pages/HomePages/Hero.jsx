@@ -32,7 +32,13 @@ const handleVolunteerClick = () => {
     return;
   }
 
-  // ✅ only runs if user exists
+  // check if user is already a volunteer
+  if (user.isVolunteer === true) {
+    toast.error("You are already a volunteer!");
+    return;
+  }
+
+  // only runs if user exists and is not a volunteer
   navigate("/volunteer");
 };
 
@@ -107,7 +113,7 @@ const handleVolunteerClick = () => {
               Talk to our team of expert today
             </p>
             <div className="flex justify-center gap-4">
-              <Link to="join" smooth={true} duration={800}>
+              <Link to="/signup" smooth={true} duration={800}>
                 <button className="px-6 py-3 rounded-full bg-white text-purple-700 font-semibold hover:bg-purple-100 transition">
                   Join Now
                 </button>
