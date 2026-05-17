@@ -115,7 +115,7 @@ const handleVolunteerClick = () => {
             <div className="flex justify-center gap-4">
               <Link to="/signup" smooth={true} duration={800}>
                 <button className="px-6 py-3 rounded-full bg-white text-purple-700 font-semibold hover:bg-purple-100 transition">
-                  Join Now
+                  Your Dashboard
                 </button>
               </Link>
               
